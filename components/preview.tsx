@@ -1,9 +1,11 @@
+import Image from "next/image"
+import roguebricksSVG from '../public/roguebricks.svg'
+import rebellugSVG from '../public/rebellug.svg'
+import avatarPNG from '../public/avatar.png'
+import instagramSVG from '../public/instagram.svg'
+import flickrSVG from '../public/flickr.svg'
+
 type PreviewProps = {
-    mocName: string,
-    mocDescription: string,
-    builder: string,
-    instagram: string,
-    flickr: string,
     lug: string,
     branding: boolean,
 }
@@ -13,23 +15,34 @@ export default function Preview(props: PreviewProps) {
 
 
     return ( 
-        <div className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark px-2 py-4">
-            <div className="flex flex-col gap-4">
-                <h1 className="mx-auto">{ props.mocName ? props.mocName : "MOC Name"}</h1>
-                <div className="h-1 mx-auto w-4/5 bg-brand"/>
-            </div>
-            
-            <div className="mx-auto grow w-4/5 text-xl font-bold">
-                { props.mocDescription ? props.mocDescription : loremIpsum }
-            </div>
+        <div className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4">
+            <input type="text" id="mocName" placeholder="MOC title" className="text-6xl font-bold text-center"></input> 
 
-            <div className="flex h-1/3 mx-auto w-4/5 flex-col gap-4">
-                <div className="h-1 mx-auto w-full bg-brand"></div>
-                <p><b>Builder:</b> { props.builder}</p>
-                <p><b>Instagram:</b> { props.instagram}</p>
-                <p><b>Flickr:</b> { props.flickr}</p>
-                { props.branding ? <p><b>Branding:</b> { props.lug }</p> : ""}
+            <div className="h-1 mx-auto w-4/5 bg-brand"/>
+             
+            <textarea className="grow mx-auto w-4/5 text-xl font-bold resize-none" id="mocDescription" name="mocDescription" placeholder={ loremIpsum }/>
+
+            <div className="h-1 mx-auto w-4/5 bg-brand"></div>
+
+            <div className="flex mx-auto w-4/5 flex-row gap-16 ">
+                <Image className="ml-8 my-8 rounded-full h-[160px] w-[160px] ring-dark" src={ avatarPNG } width={200} height={200} alt="Profile picture"/>
+                
+                <div className="flex my-6 flex-col gap-2">
+                    <input className="text-4xl font-bold" type="text" id="builder" name="builder" placeholder="Builder"/>
+                    <input className="text-3xl font-bold" type="text" id="from" name="from" placeholder="Billund"/>
+
+                    <div className="flex flex-row gap-2">
+                        <Image className="border-4 rounded-lg border-dark" width={40} height={40} src={ flickrSVG } alt="Flickr Logo"/>
+                        <input className="text-2xl font-bold" type="text" id="flickr" name="flickr" placeholder="username"/>
+                    </div>
+
+                    <div className="flex flex-row gap-2">
+                        <Image width={40} height={40} src={ instagramSVG } alt="Instagram Logo"/>
+                        <input className="text-2xl font-bold" type="text" id="instagram" name="instagram" placeholder="username"/>
+                    </div>
+                </div>
             </div>
+            <Image className="max-h-1/4 my-auto pb-10 justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
         </div>
     )
 }

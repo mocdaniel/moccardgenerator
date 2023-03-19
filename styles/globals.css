@@ -15,4 +15,5 @@ h1 {
 
 input, textarea {
   @apply text-dark;
+  @apply bg-light;
 }
