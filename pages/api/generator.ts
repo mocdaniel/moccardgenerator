@@ -1,4 +1,6 @@
-export default function handler(req, res) {
+import { NextApiRequest, NextApiResponse } from "next"
+
+export default function handler(req: NextApiRequest, res: NextApiResponse) {
     const body = req.body
 
     if (!body.mocName) {
