@@ -10,12 +10,11 @@ type PreviewProps = {
     branding: boolean,
 }
 
-export default function Preview(props: PreviewProps) {
-    const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
-
-    return ( 
-        <div className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4">
+export default function Preview (props: PreviewProps) {
+    return (
+        <div id="preview" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4">
             <input type="text" id="mocName" placeholder="MOC title" className="text-6xl font-bold text-center"></input> 
 
             <div className="h-1 mx-auto w-4/5 bg-brand"/>
@@ -43,6 +42,6 @@ export default function Preview(props: PreviewProps) {
                 </div>
             </div>
             <Image className="max-h-1/4 my-auto pb-10 justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
-        </div>
+        </div>  
     )
 }
