@@ -22,7 +22,7 @@ h1 {
 
 input, textarea {
   @apply text-dark;
-  @apply bg-light;
+  background-color: transparent;
 }
 
 button {
@@ -36,5 +36,19 @@ button {
 }
 
 #preview {
-  background-image: url("../public/background.jpeg");
+  @apply overflow-hidden;
+  @apply relative;
+}
+
+#preview-background {
+  @apply opacity-30;
+  @apply absolute;
+  @apply left-0;
+  @apply top-0;
+  @apply w-full;
+  @apply h-auto;
+}
+
+#preview-content {
+  @apply relative;
 }
