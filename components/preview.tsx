@@ -4,6 +4,7 @@ import rebellugSVG from '../public/rebellug.svg'
 import avatarPNG from '../public/avatar.png'
 import instagramSVG from '../public/instagram.svg'
 import flickrSVG from '../public/flickr.svg'
+import { backgroundImage } from "html2canvas/dist/types/css/property-descriptors/background-image"
 
 type PreviewProps = {
     lug: string,
@@ -15,7 +16,7 @@ const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
 export default function Preview (props: PreviewProps) {
     return (
         <div id="preview" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4">
-            <input type="text" id="mocName" placeholder="MOC title" className="text-6xl font-bold text-center"></input> 
+            <input type="text" id="mocName" placeholder="MOC title" className="text-6xl mx-auto w-4/5 font-bold text-center"></input> 
 
             <div className="h-1 mx-auto w-4/5 bg-brand"/>
              

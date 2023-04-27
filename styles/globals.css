@@ -24,3 +24,17 @@ input, textarea {
   @apply text-dark;
   @apply bg-light;
 }
+
+button {
+  @apply bg-light;
+  @apply text-brand;
+  @apply font-bold;
+  @apply border-2;
+  @apply rounded-md;
+  @apply px-2;
+  @apply mx-2;
+}
+
+#preview {
+  background-image: url("../public/background.jpeg");
+}
