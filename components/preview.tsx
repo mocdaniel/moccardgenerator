@@ -5,17 +5,24 @@ import avatarPNG from '../public/avatar.png'
 import instagramSVG from '../public/instagram.svg'
 import flickrSVG from '../public/flickr.svg'
 import backgroundImage from '../public/background.jpeg'
+import { Bebas_Neue } from 'next/font/google'
+
+const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: '400'})
 
 type PreviewProps = {
     lug: string,
     branding: boolean,
 }
 
+const previewClassName = "flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4 " + bebasNeue.className
+
+console.log(previewClassName)
+
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
 
 export default function Preview (props: PreviewProps) {
     return (
-        <div id="preview" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4">
+        <div id="preview" className={ previewClassName }>
             <Image id="preview-background" src={ backgroundImage } alt=""/>
             <div id="preview-content" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-transparent text-dark py-4">
             <input type="text" id="mocName" placeholder="MOC title" className="text-6xl mx-auto w-4/5 font-bold text-center"></input> 
