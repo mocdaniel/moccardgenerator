@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Preview from '../components/preview'
 import { MutableRefObject, useState } from 'react'
 import { toJpeg, toPng, toSvg } from 'html-to-image'
+import jsPDF from 'jspdf'
 
 
 export default function Home() {
@@ -20,12 +21,42 @@ export default function Home() {
     setLug(e.target.value)
   }
 
-  const handleDownloadPng = async () => {
+  const generatePdf = async () => {
+    const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
+    const dataFormat = dataFormatA5;
+    const dataQuality = {
+      low: 1.0,
+      medium: 1.25,
+      high: 2.0,
+      superhigh: 3,
+      supersuperhigh: 4,
+    }
+
+    var imgData = await generatePng()
+
+    if (!imgData) { return }
+    var doc = new jsPDF({
+      orientation: 'portrait',
+      unit: 'mm',
+      format: dataFormat.code
+    })
+    doc.viewerPreferences({ FitWindow: true}, true)
+    doc.addImage(imgData, 'JPEG', 0, 0, dataFormat.w, dataFormat.h)
+    doc.save('moccard.pdf')
+  }
+
+  const generatePng = async () => {
     const element = document.getElementById("preview")
     if (!element) { return }
     const png = await toPng(element)
+    return png
+  }
+
+  const handleDownloadPng = async () => {
+    const png = await generatePng()
+    if (!png) { return }
     const link = document.createElement('a')
-    link.download = 'moccard.png';
+    link.download = 'moccard.png'
     link.href = png
     link.click()
     link.remove()
@@ -67,6 +98,7 @@ export default function Home() {
 
         <button type="button" onClick={ handleDownloadPng }>Download as PNG</button>
         <button type="button" onClick={ handleDownloadJpeg }>Download as JPEG</button>
+        <button type="button" onClick={ generatePdf }>Download as PDF</button>
       </main>
     </>
   )

@@ -9,7 +9,8 @@ module.exports = {
       brand: "#F29D64",
       dark: "#344050",
       mid: "#C7CFDB",
-      light: "#F8FAFC"
+      light: "#F8FAFC",
+      black: "#000000",
     },
   },
   plugins: [],

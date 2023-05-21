@@ -22,5 +22,33 @@ h1 {
 
 input, textarea {
   @apply text-dark;
+  background-color: transparent;
+}
+
+button {
   @apply bg-light;
+  @apply text-brand;
+  @apply font-bold;
+  @apply border-2;
+  @apply rounded-md;
+  @apply px-2;
+  @apply mx-2;
+}
+
+#preview {
+  @apply overflow-hidden;
+  @apply relative;
+}
+
+#preview-background {
+  @apply opacity-30;
+  @apply absolute;
+  @apply left-0;
+  @apply top-0;
+  @apply w-full;
+  @apply h-auto;
+}
+
+#preview-content {
+  @apply relative;
 }
