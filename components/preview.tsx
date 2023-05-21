@@ -29,7 +29,7 @@ export default function Preview (props: PreviewProps) {
 
             <div className="h-1 mx-auto w-4/5 bg-brand"/>
              
-            <textarea className="grow mx-auto w-4/5 text-xl font-bold resize-none" id="mocDescription" name="mocDescription" placeholder={ loremIpsum }/>
+            <textarea className="grow mx-auto w-4/5 text-4xl font-bold resize-none" id="mocDescription" name="mocDescription" placeholder={ loremIpsum }/>
 
             <div className="h-1 mx-auto w-4/5 bg-brand"></div>
 
