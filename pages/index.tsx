@@ -22,7 +22,7 @@ export default function Home() {
   }
 
   const generatePdf = async () => {
-    const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
+    const dataFormatA5 = { code: 'a5', h: 1240, w: 874 }
     const dataFormat = dataFormatA5;
     const dataQuality = {
       low: 1.0,
@@ -37,18 +37,19 @@ export default function Home() {
     if (!imgData) { return }
     var doc = new jsPDF({
       orientation: 'portrait',
-      unit: 'mm',
-      format: dataFormat.code
+      unit: 'px',
+      format: dataFormat.code,
+      hotfixes: ['px_scaling']
     })
     doc.viewerPreferences({ FitWindow: true}, true)
-    doc.addImage(imgData, 'JPEG', 0, 0, dataFormat.w, dataFormat.h)
+    doc.addImage(imgData, 'PNG', 0, 0, dataFormat.w, dataFormat.h, undefined, 'NONE')
     doc.save('moccard.pdf')
   }
 
   const generatePng = async () => {
     const element = document.getElementById("preview")
     if (!element) { return }
-    const png = await toPng(element)
+    const png = await toPng(element, { height: 1240, width: 874, canvasWidth: 874, canvasHeight: 1240, quality: 1.0, pixelRatio: 1.0})
     return png
   }
 
@@ -65,7 +66,7 @@ export default function Home() {
   const handleDownloadJpeg = async () => {
     const element = document.getElementById("preview")
     if (!element) { return }
-    const jpeg = await toJpeg(element)
+    const jpeg = await toJpeg(element, { height: 1240, width: 874, canvasWidth: 874, canvasHeight: 1240, quality: 1.0, pixelRatio: 1.0})
     const link = document.createElement('a')
     link.download = 'moccard.jpeg';
     link.href = jpeg
