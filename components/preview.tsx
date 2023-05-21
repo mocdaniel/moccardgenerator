@@ -41,12 +41,12 @@ export default function Preview (props: PreviewProps) {
                     <input className="text-3xl font-bold" type="text" id="from" name="from" placeholder="Billund"/>
 
                     <div className="flex flex-row gap-2">
-                        <Image className="border-4 rounded-lg border-dark" width={40} height={40} src={ flickrSVG } alt="Flickr Logo"/>
+                        <Image className="border-4 rounded-lg border-dark" width={30} height={30} src={ flickrSVG } alt="Flickr Logo"/>
                         <input className="text-2xl font-bold" type="text" id="flickr" name="flickr" placeholder="username"/>
                     </div>
 
                     <div className="flex flex-row gap-2">
-                        <Image width={40} height={40} src={ instagramSVG } alt="Instagram Logo"/>
+                        <Image width={30} height={30} src={ instagramSVG } alt="Instagram Logo"/>
                         <input className="text-2xl font-bold" type="text" id="instagram" name="instagram" placeholder="username"/>
                     </div>
                 </div>
