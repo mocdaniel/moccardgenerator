@@ -14,7 +14,7 @@ type PreviewProps = {
     branding: boolean,
 }
 
-const previewClassName = "flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark py-4 " + bebasNeue.className
+const previewClassName = "flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark " + bebasNeue.className
 
 console.log(previewClassName)
 
