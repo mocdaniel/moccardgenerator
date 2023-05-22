@@ -21,7 +21,7 @@ h1 {
 }
 
 input, textarea {
-  @apply text-dark;
+  @apply text-black;
   background-color: transparent;
 }
 
