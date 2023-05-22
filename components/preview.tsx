@@ -6,6 +6,7 @@ import instagramSVG from '../public/instagram.svg'
 import flickrSVG from '../public/flickr.svg'
 import backgroundImage from '../public/background.jpeg'
 import { Roboto_Condensed } from 'next/font/google'
+import { Color } from "react-color-palette"
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
@@ -13,6 +14,7 @@ const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
 type PreviewProps = {
     lug: string,
     branding: boolean,
+    accent: Color,
 }
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
@@ -24,11 +26,11 @@ export default function Preview (props: PreviewProps) {
             <div id="preview-content" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-transparent text-dark py-4">
                 <input type="text" id="mocName" placeholder="MOC title" className={ "mx-auto w-4/5 h-[196px] text-7xl text-center uppercase " + robotoBold.className}></input> 
 
-                <div className="h-1 mx-auto w-4/5 bg-brand"/>
+                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}/>
 
                 <textarea className={"grow mx-auto w-4/5 text-4xl h-[562px] resize-none " + roboto.className} id="mocDescription" name="mocDescription" placeholder={ loremIpsum }/>
 
-                <div className="h-1 mx-auto w-4/5 bg-brand"></div>
+                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}></div>
 
                 <div className="flex mx-auto w-4/5 flex-row pt-8 gap-16 h-[256px]">
                     <Image className="ml-8 mb-8 rounded-full h-[160px] w-[160px] ring-dark" src={ avatarPNG } width={200} height={200} alt="Profile picture"/>

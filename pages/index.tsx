@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import Preview from '../components/preview'
-import { MutableRefObject, useState } from 'react'
-import { toJpeg, toPng, toSvg } from 'html-to-image'
+import { useState } from 'react'
+import { toJpeg, toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
+import { ColorPicker, useColor } from "react-color-palette"
+import "react-color-palette/lib/css/styles.css"
 
 
 export default function Home() {
-  const [branding, setBranding] = useState(true)
+  const [branding] = useState(true)
+  const [color, setColor] = useColor("hex", "#121212")
   const [lug, setLug] = useState("")
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -86,13 +89,16 @@ export default function Home() {
         <h1>MOC Card Generator</h1>
 
         <form className="flex flex-row w-4/5 justify-between gap-4 mx-auto my-16" action="/api/generate" method="post">
-          <Preview branding={ branding } lug={ lug }></Preview>
+          <Preview branding={ branding } lug={ lug } accent={ color }></Preview>
           <div className="flex flex-col gap-2">
             <div>
               <fieldset>
                 <input type="radio" id="roguebricks" name="lug" value="Roguebricks" onChange={ handleInputChange }/> Roguebricks
                 <input type="radio" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
               </fieldset>
+              <label htmlFor="accent">Accent color</label>
+              <ColorPicker width={456} height={228} color={color} 
+                   onChange={setColor} hideHSV dark />
             </div>
           </div>
         </form>
