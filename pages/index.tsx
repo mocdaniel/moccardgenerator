@@ -11,6 +11,7 @@ export default function Home() {
   const [branding] = useState(true)
   const [color, setColor] = useColor("hex", "#121212")
   const [lug, setLug] = useState("")
+  const [visible, setVisible] = useState(false)
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.name) {
@@ -77,6 +78,10 @@ export default function Home() {
     link.remove()
   }
 
+  const toggleModal = () => {
+    setVisible(!visible)
+  }
+
   return (
     <>
       <Head>
@@ -96,9 +101,10 @@ export default function Home() {
                 <input type="radio" id="roguebricks" name="lug" value="Roguebricks" onChange={ handleInputChange }/> Roguebricks
                 <input type="radio" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
               </fieldset>
-              <label htmlFor="accent">Accent color</label>
-              <ColorPicker width={456} height={228} color={color} 
-                   onChange={setColor} hideHSV dark />
+            </div>
+            <div className="flex flex-row gap-2 items-center">
+                <label>Accent Color</label>
+                <div style={{ backgroundColor: color.hex}} className="w-8 h-8" onClick={toggleModal}></div>
             </div>
           </div>
         </form>
@@ -107,6 +113,19 @@ export default function Home() {
         <button type="button" onClick={ handleDownloadJpeg }>Download as JPEG</button>
         <button type="button" onClick={ generatePdf }>Download as PDF</button>
       </main>
+
+      {visible && (
+        <div className="fixed top-0 left-0 w-full h-full bg-dark bg-opacity-50 flex justify-center items-center">
+          <div className="bg-light p-4 rounded-lg flex flex-col gap-4 items-center">
+            <h2 className="text-2xl font-bold text-black">Pick an accent color</h2>
+            <ColorPicker width={456} height={228} color={color} 
+              onChange={setColor} hideHSV dark 
+            />
+            <button className="bg-blue-500 border-black text-black px-4 py-2 rounded-lg" onClick={toggleModal}>Save</button>
+          </div>
+        </div>
+        
+      )}
     </>
   )
 }

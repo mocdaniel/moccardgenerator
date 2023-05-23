@@ -23,7 +23,7 @@ export default function Preview (props: PreviewProps) {
     return (
         <div id="preview" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-light text-dark">
             <Image id="preview-background" src={ backgroundImage } alt=""/>
-            <div id="preview-content" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-transparent text-dark py-4">
+            <div id="preview-content" className="flex flex-col justify-between gap-4 w-[874px] h-[1240px] bg-transparent text-dark pt-4">
                 <input type="text" id="mocName" placeholder="MOC title" className={ "mx-auto w-4/5 h-[196px] text-7xl text-center uppercase " + robotoBold.className}></input> 
 
                 <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}/>
@@ -52,7 +52,9 @@ export default function Preview (props: PreviewProps) {
                     </div>
                 </div>
 
-                <Image className="max-h-1/4 pb-10 h-[206px] justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
+                <div className="flex flex-col bg-opacity-10" style={{ backgroundColor: `rgba(${props.accent.rgb.r},${props.accent.rgb.g},${props.accent.rgb.b},0.7` }}>
+                    <Image className="max-h-1/4 pb-10 h-[206px] justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
+                </div>
         
             </div>
         </div>  
