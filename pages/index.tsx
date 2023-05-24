@@ -6,12 +6,19 @@ import jsPDF from 'jspdf'
 import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 
-
 export default function Home() {
   const [branding] = useState(true)
   const [color, setColor] = useColor("hex", "#121212")
   const [lug, setLug] = useState("")
   const [visible, setVisible] = useState(false)
+  const [image, setImage] = useState<File | null>(null)
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      setImage(file)
+    }
+  }
 
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     switch (e.target.name) {
@@ -28,13 +35,6 @@ export default function Home() {
   const generatePdf = async () => {
     const dataFormatA5 = { code: 'a5', h: 1240, w: 874 }
     const dataFormat = dataFormatA5;
-    const dataQuality = {
-      low: 1.0,
-      medium: 1.25,
-      high: 2.0,
-      superhigh: 3,
-      supersuperhigh: 4,
-    }
 
     var imgData = await generatePng()
 
@@ -92,9 +92,9 @@ export default function Home() {
       </Head>
       <main className="px-4 py-8">
         <h1>MOC Card Generator</h1>
+        <form className="flex flex-row w-4/5 justify-between gap-4 mx-auto my-16">
+          <Preview branding={ branding } lug={ lug } accent={ color } avatar={ image }></Preview>
 
-        <form className="flex flex-row w-4/5 justify-between gap-4 mx-auto my-16" action="/api/generate" method="post">
-          <Preview branding={ branding } lug={ lug } accent={ color }></Preview>
           <div className="flex flex-col gap-2">
             <div>
               <fieldset>
@@ -103,8 +103,14 @@ export default function Home() {
               </fieldset>
             </div>
             <div className="flex flex-row gap-2 items-center">
-                <label>Accent Color</label>
-                <div style={{ backgroundColor: color.hex}} className="w-8 h-8" onClick={toggleModal}></div>
+              <label>Accent Color</label>
+              <div style={{ backgroundColor: color.hex}} className="w-8 h-8" onClick={toggleModal}></div>
+            </div>
+            <div className="flex flex-row gap-2 items-center">
+              <div className="relative">
+                <input id="avatar" type="file" className="opacity-0 absolute inset-0" onChange={handleImageChange} />
+                <button className="border-2 border-light rounded-md text-light bg-dark px-4 py-2" onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
+              </div>
             </div>
           </div>
         </form>
