@@ -1,7 +1,7 @@
 import Image from "next/image"
 import roguebricksSVG from '../public/roguebricks.svg'
 import rebellugSVG from '../public/rebellug.svg'
-import avatarPNG from '../public/avatar.png'
+import placeholderAvatar from '../public/avatar.png'
 import instagramSVG from '../public/instagram.svg'
 import flickrSVG from '../public/flickr.svg'
 import backgroundImage from '../public/background.jpeg'
@@ -15,6 +15,7 @@ type PreviewProps = {
     lug: string,
     branding: boolean,
     accent: Color,
+    avatar: File | null,
 }
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
@@ -33,7 +34,7 @@ export default function Preview (props: PreviewProps) {
                 <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}></div>
 
                 <div className="flex mx-auto w-4/5 flex-row pt-8 gap-16 h-[256px]">
-                    <Image className="ml-8 mb-8 rounded-full h-[160px] w-[160px] ring-dark" src={ avatarPNG } width={200} height={200} alt="Profile picture"/>
+                    <Image className="ml-8 mb-8 rounded-full h-[160px] w-[160px] ring-dark" src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } width={200} height={200} alt="Profile picture"/>
 
                     <div className="flex mb-6 flex-col">
                         <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
