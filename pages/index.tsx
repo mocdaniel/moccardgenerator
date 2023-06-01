@@ -33,20 +33,18 @@ export default function Home() {
   }
 
   const generatePdf = async () => {
-    const dataFormatA5 = { code: 'a5', h: 1240, w: 874 }
-    const dataFormat = dataFormatA5;
+    const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
 
     var imgData = await generatePng()
 
     if (!imgData) { return }
     var doc = new jsPDF({
       orientation: 'portrait',
-      unit: 'px',
-      format: dataFormat.code,
-      hotfixes: ['px_scaling']
+      unit: 'mm',
+      format: dataFormatA5.code
     })
     doc.viewerPreferences({ FitWindow: true}, true)
-    doc.addImage(imgData, 'PNG', 0, 0, dataFormat.w, dataFormat.h, undefined, 'NONE')
+    doc.addImage(imgData, 'PNG', 0, 0, dataFormatA5.w, dataFormatA5.h, undefined, 'NONE')
     doc.save('moccard.pdf')
   }
 
