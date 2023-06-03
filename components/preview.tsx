@@ -42,7 +42,7 @@ export default function Preview (props: PreviewProps) {
                         <input className={"text-3xl " + robotoBold.className } type="text" id="from" name="from" placeholder="Billund"/>
 
                         <div className="flex flex-row gap-2 mt-4 mb-2">
-                            <Image className="border-4 rounded-lg border-dark" width={30} height={30} src={ flickrSVG } alt="Flickr Logo"/>
+                            <Image className="border-4 rounded-lg border-black" width={30} height={30} src={ flickrSVG } alt="Flickr Logo"/>
                             <input className={"text-2xl " + roboto.className } type="text" id="flickr" name="flickr" placeholder="username"/>
                         </div>
 
