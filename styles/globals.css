@@ -25,14 +25,23 @@ input, textarea {
   background-color: transparent;
 }
 
-button {
-  @apply bg-light;
-  @apply text-brand;
+label {
+  @apply text-xl;
   @apply font-bold;
+}
+
+button {
   @apply border-2;
+  @apply border-light;
   @apply rounded-md;
-  @apply px-2;
-  @apply mx-2;
+  @apply text-light;
+  @apply bg-dark;
+  @apply px-4;
+  @apply py-2;
+  @apply font-bold;
+  @apply hover:bg-light;
+  @apply hover:text-dark;
+  background-color: transparent;
 }
 
 #preview {

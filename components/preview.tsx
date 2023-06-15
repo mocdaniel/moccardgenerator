@@ -53,9 +53,12 @@ export default function Preview (props: PreviewProps) {
                     </div>
                 </div>
 
-                <div className="flex flex-col bg-opacity-10" style={{ backgroundColor: `rgba(${props.accent.rgb.r},${props.accent.rgb.g},${props.accent.rgb.b},0.7` }}>
-                    <Image className="max-h-1/4 pb-10 h-[206px] justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
+                <div className="flex flex-col bg-opacity-10 h-[206px]" style={{ backgroundColor: `rgba(${props.accent.rgb.r},${props.accent.rgb.g},${props.accent.rgb.b},0.7` }}>
+                    { props.lug && (
+                        <Image className="max-h-1/4 h-[206px] justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
+                    )}
                 </div>
+                
         
             </div>
         </div>  

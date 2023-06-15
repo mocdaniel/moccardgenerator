@@ -88,34 +88,36 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="px-4 py-8">
-        <h1>MOC Card Generator</h1>
-        <form className="flex flex-row w-4/5 justify-between gap-4 mx-auto my-16">
+      <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
           <Preview branding={ branding } lug={ lug } accent={ color } avatar={ image }></Preview>
 
-          <div className="flex flex-col gap-2">
-            <div>
-              <fieldset>
-                <input type="radio" id="roguebricks" name="lug" value="Roguebricks" onChange={ handleInputChange }/> Roguebricks
-                <input type="radio" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
-              </fieldset>
-            </div>
-            <div className="flex flex-row gap-2 items-center">
-              <label>Accent Color</label>
-              <div style={{ backgroundColor: color.hex}} className="w-8 h-8" onClick={toggleModal}></div>
-            </div>
-            <div className="flex flex-row gap-2 items-center">
-              <div className="relative">
-                <input id="avatar" type="file" className="opacity-0 absolute inset-0" onChange={handleImageChange} />
-                <button className="border-2 border-light rounded-md text-light bg-dark px-4 py-2" onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
+          <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
+            <h1>MOC Card Generator</h1>
+          
+            <div className="flex flex-col pt-8 gap-2">
+              <div>
+                <label>Choose your LUG or leave the bottom header empty</label>
+                <fieldset className="font-bold pt-2">
+                  <input type="radio" id="roguebricks" name="lug" value="Roguebricks" onChange={ handleInputChange }/> Roguebricks
+                  <input type="radio" className="ml-4" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
+                </fieldset>
+              </div>
+              <div className="flex flex-row gap-2 pt-8 items-center">
+                <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
+                <label>Click to pick your accent color</label>
+                <div className="ml-8">
+                  <input id="avatar" type="file" className="opacity-0 absolute inset-0" onChange={handleImageChange} />
+                  <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
+                </div>
+              </div>
+
+              <div className="flex flex-row flex-grow gap-2 justify-between pt-8">
+                <button className="flex-grow" onClick={ handleDownloadPng }>Download as PNG</button>
+                <button className="flex-grow" onClick={ handleDownloadJpeg }>Download as JPEG</button>
+                <button className="flex-grow" onClick={ generatePdf }>Download as PDF</button>
               </div>
             </div>
           </div>
-        </form>
-
-        <button type="button" onClick={ handleDownloadPng }>Download as PNG</button>
-        <button type="button" onClick={ handleDownloadJpeg }>Download as JPEG</button>
-        <button type="button" onClick={ generatePdf }>Download as PDF</button>
       </main>
 
       {visible && (
@@ -125,7 +127,7 @@ export default function Home() {
             <ColorPicker width={456} height={228} color={color} 
               onChange={setColor} hideHSV dark 
             />
-            <button className="bg-blue-500 border-black text-black px-4 py-2 rounded-lg" onClick={toggleModal}>Save</button>
+            <button className="hover:bg-dark hover:text-light text-dark border-dark" onClick={toggleModal}>Save</button>
           </div>
         </div>
         
