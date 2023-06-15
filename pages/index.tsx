@@ -106,7 +106,7 @@ export default function Home() {
                 <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
                 <label>Click to pick your accent color</label>
                 <div className="ml-8">
-                  <input id="avatar" type="file" className="opacity-0 absolute inset-0" onChange={handleImageChange} />
+                  <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
                   <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
                 </div>
               </div>
