@@ -102,9 +102,12 @@ export default function Home() {
                   <input type="radio" className="ml-4" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
                 </fieldset>
               </div>
-              <div className="flex flex-row gap-2 pt-8 items-center">
-                <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
-                <label>Click to pick your accent color</label>
+              <div className="flex flex-row gap-2 pt-8 justify-between items-center">
+                <div className="flex flex-row gap-2">
+                  <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
+                  <label>Click to pick your accent color</label>
+                </div>
+                
                 <div className="ml-8">
                   <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
                   <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
