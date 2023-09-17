@@ -20,18 +20,6 @@ export default function Home() {
     }
   }
 
-  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
-    switch (e.target.name) {
-      case "lug": {
-        console.log("value: " + e.target.value)
-        setLug(e.target.value)
-        console.log("new value: " + lug)
-        break
-      }
-    }
-    setLug(e.target.value)
-  }
-
   const generatePdf = async () => {
     const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
 
@@ -98,8 +86,8 @@ export default function Home() {
               <div>
                 <label>Choose your LUG or leave the bottom header empty</label>
                 <fieldset className="font-bold pt-2">
-                  <input type="radio" id="roguebricks" name="lug" value="Roguebricks" onChange={ handleInputChange }/> Roguebricks
-                  <input type="radio" className="ml-4" id="rebellug" name="lug" value="RebelLUG" onChange={ handleInputChange }/> RebelLUG
+                  <input type="radio" id="roguebricks" name="lug" checked={lug === 'Roguebricks'} value="Roguebricks" onChange={ () => setLug('Roguebricks') }/> Roguebricks
+                  <input type="radio" className="ml-4" id="rebellug" name="lug" checked={lug === 'RebelLUG'} value="RebelLUG" onChange={ () => setLug('RebelLUG') }/> RebelLUG
                 </fieldset>
               </div>
               <div className="flex flex-row gap-2 pt-8 justify-between items-center">

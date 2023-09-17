@@ -62,7 +62,7 @@ export default function Preview (props: PreviewProps) {
 
                 <div className="flex flex-col bg-opacity-10 h-[220px] pb-8">
                     { props.lug && (
-                        <Image className="max-h-1/4 h-[220px] justify-self-center self-center" width={300} src={ props.lug == "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Roguebricks Logo"></Image>
+                        <Image className="max-h-1/4 h-[220px] justify-self-center self-center" width={300} src={ props.lug === "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Logo"></Image>
                     )}
                 </div>
                 
