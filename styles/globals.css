@@ -49,13 +49,8 @@ button {
   @apply relative;
 }
 
-#preview-background {
-  @apply opacity-30;
+.preview-backgrounds {
   @apply absolute;
-  @apply left-0;
-  @apply top-0;
-  @apply w-full;
-  @apply h-auto;
 }
 
 #preview-content {
