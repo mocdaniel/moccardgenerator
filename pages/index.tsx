@@ -7,20 +7,22 @@ import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 
 export default function Home() {
-  const [branding] = useState(true)
-  const [color, setColor] = useColor("hex", "#121212")
-  const [lug, setLug] = useState("")
-  const [visible, setVisible] = useState(false)
-  const [image, setImage] = useState<File | null>(null)
+  const [branding] = useState(true);
+  const [color, setColor] = useColor("hex", "#ffc116");
+  const [lug, setLug] = useState("");
+  const [visible, setVisible] = useState(false);
+  const [avatarImage, setAvatarImage] = useState<File | null>(null);
+  const [isRender, setIsRender] = useState(false);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
-      setImage(file)
+      setAvatarImage(file)
     }
   }
 
   const generatePdf = async () => {
+    setIsRender(true)
     const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
 
     var imgData = await generatePng()
@@ -34,6 +36,8 @@ export default function Home() {
     doc.viewerPreferences({ FitWindow: true}, true)
     doc.addImage(imgData, 'PNG', 0, 0, dataFormatA5.w, dataFormatA5.h, undefined, 'NONE')
     doc.save('moccard.pdf')
+    setIsRender(false)
+    location.reload();
   }
 
   const generatePng = async () => {
@@ -77,7 +81,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <Preview branding={ branding } lug={ lug } accent={ color } avatar={ image }></Preview>
+          <Preview isRender={isRender} branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage }></Preview>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
@@ -86,8 +90,8 @@ export default function Home() {
               <div>
                 <label>Choose your LUG or leave the bottom header empty</label>
                 <fieldset className="font-bold pt-2">
-                  <input type="radio" id="roguebricks" name="lug" checked={lug === 'Roguebricks'} value="Roguebricks" onChange={ () => setLug('Roguebricks') }/> Roguebricks
-                  <input type="radio" className="ml-4" id="rebellug" name="lug" checked={lug === 'RebelLUG'} value="RebelLUG" onChange={ () => setLug('RebelLUG') }/> RebelLUG
+                  <input type="radio" id="roguebricks" name="lug" checked={lug === 'Roguebricks'} value="Roguebricks" onChange={ event => setLug(event.target.value) }/> Roguebricks
+                  <input type="radio" className="ml-4" id="rebellug" name="lug" checked={lug === 'RebelLUG'} value="RebelLUG" onChange={ event => setLug(event.target.value) }/> RebelLUG
                 </fieldset>
               </div>
               <div className="flex flex-row gap-2 pt-8 justify-between items-center">
