@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import Preview from '../components/preview'
-import { useState } from 'react'
+import { forwardRef, useCallback, useRef, useState } from 'react'
 import { toJpeg, toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
 import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
+
 
 export default function Home() {
   const [branding] = useState(true);
@@ -13,59 +14,30 @@ export default function Home() {
   const [visible, setVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const [isRender, setIsRender] = useState(false);
+  const ref = useRef<HTMLDivElement>(null)
+
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+
+    toPng(ref.current)
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'my-image-name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [ref, branding, color, lug, avatarImage])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (file) {
       setAvatarImage(file)
     }
-  }
-
-  const generatePdf = async () => {
-    setIsRender(true)
-    const dataFormatA5 = { code: 'a5', h: 210, w: 148 }
-
-    var imgData = await generatePng()
-
-    if (!imgData) { return }
-    var doc = new jsPDF({
-      orientation: 'portrait',
-      unit: 'mm',
-      format: dataFormatA5.code
-    })
-    doc.viewerPreferences({ FitWindow: true}, true)
-    doc.addImage(imgData, 'PNG', 0, 0, dataFormatA5.w, dataFormatA5.h, undefined, 'NONE')
-    doc.save('moccard.pdf')
-    setIsRender(false)
-    location.reload();
-  }
-
-  const generatePng = async () => {
-    const element = document.getElementById("preview")
-    if (!element) { return }
-    const png = await toPng(element, { height: 1240, width: 874, canvasWidth: 874, canvasHeight: 1240, quality: 1.0, pixelRatio: 1.0})
-    return png
-  }
-
-  const handleDownloadPng = async () => {
-    const png = await generatePng()
-    if (!png) { return }
-    const link = document.createElement('a')
-    link.download = 'moccard.png'
-    link.href = png
-    link.click()
-    link.remove()
-  }
-
-  const handleDownloadJpeg = async () => {
-    const element = document.getElementById("preview")
-    if (!element) { return }
-    const jpeg = await toJpeg(element, { height: 1240, width: 874, canvasWidth: 874, canvasHeight: 1240, quality: 1.0, pixelRatio: 1.0})
-    const link = document.createElement('a')
-    link.download = 'moccard.jpeg';
-    link.href = jpeg
-    link.click()
-    link.remove()
   }
 
   const toggleModal = () => {
@@ -81,7 +53,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <Preview isRender={isRender} branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage }></Preview>
+          <div ref={ref}><Preview isRender={isRender} branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage }></Preview></div>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
@@ -107,9 +79,7 @@ export default function Home() {
               </div>
 
               <div className="flex flex-row flex-grow gap-2 justify-between pt-8">
-                <button className="flex-grow" onClick={ handleDownloadPng }>Download as PNG</button>
-                <button className="flex-grow" onClick={ handleDownloadJpeg }>Download as JPEG</button>
-                <button className="flex-grow" onClick={ generatePdf }>Download as PDF</button>
+                <button className="flex-grow" onClick={ onButtonClick }>Download as PNG</button>
               </div>
             </div>
           </div>
@@ -124,8 +94,7 @@ export default function Home() {
             />
             <button className="hover:bg-dark hover:text-light text-dark border-dark" onClick={toggleModal}>Save</button>
           </div>
-        </div>
-        
+        </div>  
       )}
     </>
   )
