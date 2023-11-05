@@ -1,8 +1,7 @@
 import Head from 'next/head'
 import Preview from '../components/preview'
-import { forwardRef, useCallback, useRef, useState } from 'react'
-import { toJpeg, toPng } from 'html-to-image'
-import jsPDF from 'jspdf'
+import { useCallback, useRef, useState } from 'react'
+import { toPng } from 'html-to-image'
 import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 

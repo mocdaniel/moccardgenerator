@@ -1,7 +1,6 @@
 'use client'
 
 import { FaTrashAlt } from 'react-icons/fa'
-import { BiSolidMessageSquareAdd } from 'react-icons/bi'
 import React from "react"
 import Image from "next/image"
 import roguebricksSVG from '../public/roguebricks.svg'
