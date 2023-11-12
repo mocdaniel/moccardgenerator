@@ -1,10 +1,10 @@
 import Head from 'next/head'
-import Preview from '../components/preview'
+import Preview from '../components/Preview'
 import { useCallback, useRef, useState } from 'react'
-import { toPng } from 'html-to-image'
 import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
-
+import { toCanvas, toSvg } from 'html-to-image'
+import jsPDF from 'jspdf'
 
 export default function Home() {
   const [branding] = useState(true);
@@ -12,7 +12,6 @@ export default function Home() {
   const [lug, setLug] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState<File | null>(null);
-  const [isRender, setIsRender] = useState(false);
   const ref = useRef<HTMLDivElement>(null)
 
   const onButtonClick = useCallback(() => {
@@ -20,12 +19,23 @@ export default function Home() {
       return
     }
 
-    toPng(ref.current)
-      .then((dataUrl) => {
-        const link = document.createElement('a')
-        link.download = 'my-image-name.png'
+    function renderFilter(node: HTMLElement) {
+      return (!node.classList.contains('no-render'));
+    }
+
+    toSvg(ref.current, { filter: renderFilter })
+      .then((dataUrl: string) => {
+        let w = window.open('about:blank', 'Download MOC Card')
+        let img = new Image()
+        img.src = dataUrl
+        setTimeout(function(){
+          w?.document.write(img.outerHTML);
+        }, 0);
+
+        {/*var link = document.createElement('a')
+        link.download = 'moccard.svg'
         link.href = dataUrl
-        link.click()
+        link.click()*/}
       })
       .catch((err) => {
         console.log(err)
@@ -51,8 +61,9 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <div ref={ref}><Preview isRender={isRender} branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage }></Preview></div>
+          <div ref={ref}><Preview branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage } /></div>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
