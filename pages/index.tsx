@@ -37,7 +37,7 @@ export default function Home() {
       .catch((err) => {
         console.log(err)
       })
-  }, [ref, branding, color, lug, avatarImage])
+  }, [ref])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
