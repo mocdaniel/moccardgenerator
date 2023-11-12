@@ -3,7 +3,7 @@ import Preview from '../components/Preview'
 import { useCallback, useRef, useState } from 'react'
 import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
-import { toCanvas, toSvg } from 'html-to-image'
+import { toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
 
 export default function Home() {
@@ -23,24 +23,21 @@ export default function Home() {
       return (!node.classList.contains('no-render'));
     }
 
-    toSvg(ref.current, { filter: renderFilter })
+    toPng(ref.current, { filter: renderFilter })
       .then((dataUrl: string) => {
-        let w = window.open('about:blank', 'Download MOC Card')
-        let img = new Image()
-        img.src = dataUrl
-        setTimeout(function(){
-          w?.document.write(img.outerHTML);
-        }, 0);
-
-        {/*var link = document.createElement('a')
-        link.download = 'moccard.svg'
-        link.href = dataUrl
-        link.click()*/}
+        var doc = new jsPDF({
+          orientation: 'portrait',
+          unit: 'mm',
+          format: 'a5'
+        })
+         doc.viewerPreferences({ FitWindow: true}, true)
+         doc.addImage(dataUrl, 'PNG', 0, 0, 148, 210, undefined, 'NONE')
+         doc.save('moccard.pdf')
       })
       .catch((err) => {
         console.log(err)
       })
-  }, [ref, branding, color, lug, avatarImage])
+  }, [ref])
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
