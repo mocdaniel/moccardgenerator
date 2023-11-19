@@ -29,22 +29,22 @@ export function LinkDropdown(props: LinkDropdownProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button style={{ backgroundColor: props.accent }} className="no-render absolute top-0 right-0 m-2 border-none" variant="default">Socials</Button>
+        <Button className="no-render absolute top-0 right-0 m-2 border-none" variant="default">Socials</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
-        <DropdownMenuCheckboxItem
-          checked={props.showInstagram}
-          onCheckedChange={props.setShowInstagram}
-          className="text-black"
-        >
-          Instagram
-        </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked={props.showFlickr}
           onCheckedChange={props.setShowFlickr}
           className="text-black"
         >
           Flickr
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={props.showInstagram}
+          onCheckedChange={props.setShowInstagram}
+          className="text-black"
+        >
+          Instagram
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked={props.showEmail}
