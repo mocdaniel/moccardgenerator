@@ -5,13 +5,15 @@ import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 import { toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
+import { PutBlobResult } from '@vercel/blob'
 
 export default function Home() {
   const [branding] = useState(true);
   const [color, setColor] = useColor("hex", "#ffc116");
   const [visible, setVisible] = useState(false);
-  const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const ref = useRef<HTMLDivElement>(null)
+  const inputFileRef = useRef<HTMLInputElement>(null);
+  const [blob, setBlob] = useState<PutBlobResult | null>(null);
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -38,13 +40,6 @@ export default function Home() {
       })
   }, [ref])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setAvatarImage(file)
-    }
-  }
-
   const toggleModal = () => {
     setVisible(!visible)
   }
@@ -59,7 +54,7 @@ export default function Home() {
       </Head>
 
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <div ref={ref}><Preview branding={ branding } accent={ color } avatar={ avatarImage } /></div>
+          <div ref={ref}><Preview branding={ branding } accent={ color } blob={ blob } /></div>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
@@ -72,9 +67,33 @@ export default function Home() {
                 </div>
                 
                 <div className="ml-8">
-                  <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
-                  <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
-                </div>
+                <form
+        onSubmit={async (event) => {
+          event.preventDefault();
+ 
+          if (!inputFileRef.current?.files) {
+            throw new Error('No file selected');
+          }
+ 
+          const file = inputFileRef.current.files[0];
+ 
+          const response = await fetch(
+            `/api/avatar/upload?filename=${file.name}`,
+            {
+              method: 'POST',
+              body: file,
+            },
+          );
+ 
+          const newBlob = (await response.json()) as PutBlobResult;
+ 
+          setBlob(newBlob);
+        }}
+      >
+        <input name="file" ref={inputFileRef} type="file" required />
+        <button type="submit">Upload</button>
+      </form>
+                  </div>
               </div>
 
               <div className="flex flex-row flex-grow gap-2 justify-between pt-8">

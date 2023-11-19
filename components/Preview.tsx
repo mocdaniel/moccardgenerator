@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react"
+import { ChangeEvent, useState } from "react"
 import Image from "next/image"
 import roguebricksSVG from '../public/roguebricks.svg'
 import rebellugSVG from '../public/rebellug.svg'
@@ -14,6 +14,7 @@ import { Roboto_Condensed } from 'next/font/google'
 import { Color } from "react-color-palette"
 import { LinkDropdown } from './LinkDropdown'
 import FooterDropdown from "./FooterDropdown"
+import { PutBlobResult } from "@vercel/blob"
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
@@ -21,22 +22,21 @@ const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
 type PreviewProps = {
     branding: boolean,
     accent: Color,
-    avatar: File | null,
+    blob: PutBlobResult | null,
 }
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
 
 export default function Preview (props: PreviewProps) {
-    const [showFlickr, setShowFlickr] = React.useState(true);
-    const [showInstagram, setShowInstagram] = React.useState(true);
-    const [showEmail, setShowEmail] = React.useState(false);
-    const [showWebsite, setShowWebsite] = React.useState(false);
-    const [showRebel, setShowRebel] = React.useState(false);
-    const [showRogue, setShowRogue] = React.useState(false);
-    const [footerImage, setFooterImage] = React.useState<File | null>(null);
+    const [showFlickr, setShowFlickr] = useState(true);
+    const [showInstagram, setShowInstagram] = useState(true);
+    const [showEmail, setShowEmail] = useState(false);
+    const [showWebsite, setShowWebsite] = useState(false);
+    const [showRebel, setShowRebel] = useState(false);
+    const [showRogue, setShowRogue] = useState(false);
+    const [footerImage, setFooterImage] = useState<File | null>(null);
 
-
-    const handleFooterImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFooterImageChange = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
           setFooterImage(file)
@@ -74,7 +74,7 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
+                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.blob?.url ? props.blob.url : placeholderAvatar } alt="Profile picture"/>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
@@ -130,9 +130,7 @@ export default function Preview (props: PreviewProps) {
                         width={300}
                         src={ footerImage ? URL.createObjectURL(footerImage) : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
                      }
-                     </div>
-                
-        
+                </div>
             </div>
         </div>
     )
