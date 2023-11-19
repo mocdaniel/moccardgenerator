@@ -16,6 +16,7 @@ export default function Home() {
   const [avatarBlob, setAvatarBlob] = useState<PutBlobResult | null>(null);
   const footerInputFileRef = useRef<HTMLInputElement>(null);
   const [footerBlob, setFooterBlob] = useState<PutBlobResult | null>(null);
+  
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -120,6 +121,8 @@ export default function Home() {
                     const newBlob = (await response.json()) as PutBlobResult;
                     
                     setFooterBlob(newBlob);
+                    console.log("Footer blob: ")
+                    console.log({ footerBlob })
                   }}
                 >
                   <input name="file" ref={footerInputFileRef} type="file" required />
