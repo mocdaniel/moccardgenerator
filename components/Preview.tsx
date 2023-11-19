@@ -13,12 +13,12 @@ import backgroundImage from '../public/background.png'
 import { Roboto_Condensed } from 'next/font/google'
 import { Color } from "react-color-palette"
 import { LinkDropdown } from './LinkDropdown'
+import FooterDropdown from "./FooterDropdown"
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
 
 type PreviewProps = {
-    lug: string,
     branding: boolean,
     accent: Color,
     avatar: File | null,
@@ -31,6 +31,17 @@ export default function Preview (props: PreviewProps) {
     const [showInstagram, setShowInstagram] = React.useState(true);
     const [showEmail, setShowEmail] = React.useState(false);
     const [showWebsite, setShowWebsite] = React.useState(false);
+    const [showRebel, setShowRebel] = React.useState(false);
+    const [showRogue, setShowRogue] = React.useState(false);
+    const [footerImage, setFooterImage] = React.useState<File | null>(null);
+
+
+    const handleFooterImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+          setFooterImage(file)
+        }
+      }
 
     return (
         <div id="preview" className="w-[874px] h-[1240px] bg-white">
@@ -61,7 +72,6 @@ export default function Preview (props: PreviewProps) {
                         setShowEmail={setShowEmail}
                         showWebsite={showWebsite}
                         setShowWebsite={setShowWebsite}
-                        accent={props.accent.hex}
                     />
 
                     <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
@@ -104,11 +114,23 @@ export default function Preview (props: PreviewProps) {
                     </div>
                 </div>
 
-                <div className="flex flex-col bg-opacity-10 h-[220px] pb-8">
-                    { props.lug && (
-                        <Image className="max-h-1/4 h-[220px] justify-self-center self-center" width={300} src={ props.lug === "Roguebricks" ? roguebricksSVG : rebellugSVG } alt="Logo"></Image>
-                    )}
-                </div>
+                <div className="relative flex flex-col bg-opacity-10 h-[220px] pb-8">
+                    <input id="footer-image" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleFooterImageChange} />
+                    <FooterDropdown
+                        showRogue={showRogue}
+                        setShowRogue={setShowRogue}
+                        showRebel={showRebel}
+                        setShowRebel={setShowRebel}
+                        footerImage={footerImage}
+                        setFooterImage={setFooterImage}
+                    />
+                    { (footerImage || showRebel || showRogue) &&
+                    <Image
+                        className="max-h-1/4 h-[220px] justify-self-center self-center"
+                        width={300}
+                        src={ footerImage ? footerImage : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
+                     }
+                     </div>
                 
         
             </div>

@@ -11,10 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
  
-type Checked = DropdownMenuCheckboxItemProps["checked"]
-
 type LinkDropdownProps = {
-  accent: string,
   showFlickr: boolean,
   showInstagram: boolean,
   showEmail: boolean,
