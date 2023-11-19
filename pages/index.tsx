@@ -93,6 +93,11 @@ export default function Home() {
         <input name="file" ref={inputFileRef} type="file" required />
         <button type="submit">Upload</button>
       </form>
+      {blob && (
+        <div>
+          Blob url: <a href={blob.url}>{blob.url}</a>
+        </div>
+      )}
                   </div>
               </div>
 
