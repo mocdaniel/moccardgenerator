@@ -5,13 +5,18 @@ import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 import { toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
+import { PutBlobResult } from '@vercel/blob'
 
 export default function Home() {
   const [branding] = useState(true);
   const [color, setColor] = useColor("hex", "#ffc116");
   const [visible, setVisible] = useState(false);
-  const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const ref = useRef<HTMLDivElement>(null)
+  const avatarInputFileRef = useRef<HTMLInputElement>(null);
+  const [avatarBlob, setAvatarBlob] = useState<PutBlobResult | null>(null);
+  const footerInputFileRef = useRef<HTMLInputElement>(null);
+  const [footerBlob, setFooterBlob] = useState<PutBlobResult | null>(null);
+  
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -38,13 +43,6 @@ export default function Home() {
       })
   }, [ref])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setAvatarImage(file)
-    }
-  }
-
   const toggleModal = () => {
     setVisible(!visible)
   }
@@ -59,7 +57,7 @@ export default function Home() {
       </Head>
 
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <div ref={ref}><Preview branding={ branding } accent={ color } avatar={ avatarImage } /></div>
+          <div ref={ref}><Preview branding={ branding } accent={ color } avatarBlob={ avatarBlob } footerBlob={ footerBlob } /></div>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
@@ -70,11 +68,64 @@ export default function Home() {
                   <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
                   <label>Click to pick your accent color</label>
                 </div>
-                
-                <div className="ml-8">
-                  <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
-                  <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
-                </div>
+              </div>
+
+              <div className="ml-8">
+                <form
+                  onSubmit={async (event) => {
+                    event.preventDefault();
+                  
+                    if (!avatarInputFileRef.current?.files) {
+                      throw new Error('No file selected');
+                    }
+                  
+                    const file = avatarInputFileRef.current.files[0];
+                  
+                    const response = await fetch(
+                      `/api/avatar/upload?filename=${file.name}`,
+                      {
+                        method: 'POST',
+                        body: file,
+                      },
+                    );
+                    
+                    const newBlob = (await response.json()) as PutBlobResult;
+                    
+                    setAvatarBlob(newBlob);
+                  }}
+                >
+                  <input name="file" ref={avatarInputFileRef} type="file" required />
+                  <button type="submit">Upload Avatar</button>
+                </form>
+              </div>
+
+              <div className="ml-8">
+                <form
+                  onSubmit={async (event) => {
+                    event.preventDefault();
+                  
+                    if (!footerInputFileRef.current?.files) {
+                      throw new Error('No file selected');
+                    }
+                  
+                    const file = footerInputFileRef.current.files[0];
+                  
+                    const response = await fetch(
+                      `/api/footer/upload?filename=${file.name}`,
+                      {
+                        method: 'POST',
+                        body: file,
+                      },
+                    );
+                    
+                    const newBlob = (await response.json()) as PutBlobResult;
+                    
+                    setFooterBlob(newBlob);
+                  }}
+                >
+                  <input name="file" ref={footerInputFileRef} type="file" required />
+                  <button type="submit">Upload Footer</button>
+                </form>
               </div>
 
               <div className="flex flex-row flex-grow gap-2 justify-between pt-8">
