@@ -121,8 +121,6 @@ export default function Home() {
                     const newBlob = (await response.json()) as PutBlobResult;
                     
                     setFooterBlob(newBlob);
-                    console.log("Footer blob: ")
-                    console.log({ footerBlob })
                   }}
                 >
                   <input name="file" ref={footerInputFileRef} type="file" required />
