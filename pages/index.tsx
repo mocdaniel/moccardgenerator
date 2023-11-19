@@ -9,7 +9,6 @@ import jsPDF from 'jspdf'
 export default function Home() {
   const [branding] = useState(true);
   const [color, setColor] = useColor("hex", "#ffc116");
-  const [lug, setLug] = useState("");
   const [visible, setVisible] = useState(false);
   const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const ref = useRef<HTMLDivElement>(null)
@@ -60,19 +59,12 @@ export default function Home() {
       </Head>
 
       <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <div ref={ref}><Preview branding={ branding } lug={ lug } accent={ color } avatar={ avatarImage } /></div>
+          <div ref={ref}><Preview branding={ branding } accent={ color } avatar={ avatarImage } /></div>
 
           <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
             <h1>MOC Card Generator</h1>
           
             <div className="flex flex-col pt-8 gap-2">
-              <div>
-                <label>Choose your LUG or leave the bottom header empty</label>
-                <fieldset className="font-bold pt-2">
-                  <input type="radio" id="roguebricks" name="lug" checked={lug === 'Roguebricks'} value="Roguebricks" onChange={ event => setLug(event.target.value) }/> Roguebricks
-                  <input type="radio" className="ml-4" id="rebellug" name="lug" checked={lug === 'RebelLUG'} value="RebelLUG" onChange={ event => setLug(event.target.value) }/> RebelLUG
-                </fieldset>
-              </div>
               <div className="flex flex-row gap-2 pt-8 justify-between items-center">
                 <div className="flex flex-row gap-2">
                   <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
