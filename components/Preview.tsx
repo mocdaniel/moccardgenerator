@@ -4,7 +4,6 @@ import { ChangeEvent, useState } from "react"
 import Image from "next/image"
 import roguebricksSVG from '../public/roguebricks.svg'
 import rebellugSVG from '../public/rebellug.svg'
-import placeholderAvatar from '../public/avatar.png'
 import flickrSVG from '../public/flickr.svg'
 import globeSVG from '../public/globe.svg'
 import instagramSVG from '../public/instagram.svg'
@@ -74,7 +73,7 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.blob?.url ? props.blob.url : placeholderAvatar } alt="Profile picture"/>
+                    <img className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.blob?.url ? props.blob.url : '/avatar.png' } alt="Profile picture"/>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
