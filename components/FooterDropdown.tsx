@@ -1,14 +1,14 @@
-import { Upload } from "lucide-react";
 import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 type FooterDropdownProps = {
   showRogue: boolean,
   showRebel: boolean,
-  footerImage: File | null,
+  showFooterImage: boolean,
   setShowRogue: (show: boolean) => void,
   setShowRebel: (show: boolean) => void,
-  setFooterImage: (image: File | null) => void,
+  setShowFooterImage: (show: boolean) => void,
+  footerBlobExists: boolean,
 }
 
 export default function FooterDropdown(props: FooterDropdownProps) {
@@ -23,7 +23,7 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           onCheckedChange={() => {
             if (!props.showRogue) {
                 props.setShowRebel(false)
-                props.setFooterImage(null)
+                props.setShowFooterImage(false)
                 props.setShowRogue(true)
             } else {
                 props.setShowRogue(false)
@@ -38,7 +38,7 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           onCheckedChange={() => {
             if (!props.showRebel) {
                 props.setShowRogue(false)
-                props.setFooterImage(null)
+                props.setShowFooterImage(false)
                 props.setShowRebel(true)
             } else {
                 props.setShowRebel(false)
@@ -49,19 +49,20 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           RebelLUG
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={props.footerImage !== null}
+          checked={props.showFooterImage}
           onCheckedChange={() => {
-            if (!props.footerImage) {
+            if (!props.showFooterImage) {
                 props.setShowRogue(false);
                 props.setShowRebel(false);
-                (document.getElementById('footer-image') as HTMLInputElement)?.click();
+                props.setShowFooterImage(true);
             } else {
-                props.setFooterImage(null)
+                props.setShowFooterImage(false)
             }
           }}
           className="text-black"
+          disabled={!props.footerBlobExists}
         >
-          Upload
+          Your Upload
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>

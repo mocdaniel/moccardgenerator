@@ -1,9 +1,7 @@
 'use client'
 
-import { ChangeEvent, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
-import roguebricksSVG from '../public/roguebricks.svg'
-import rebellugSVG from '../public/rebellug.svg'
 import flickrSVG from '../public/flickr.svg'
 import globeSVG from '../public/globe.svg'
 import instagramSVG from '../public/instagram.svg'
@@ -21,7 +19,8 @@ const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
 type PreviewProps = {
     branding: boolean,
     accent: Color,
-    blob: PutBlobResult | null,
+    avatarBlob: PutBlobResult | null,
+    footerBlob: PutBlobResult | null,
 }
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
@@ -33,14 +32,7 @@ export default function Preview (props: PreviewProps) {
     const [showWebsite, setShowWebsite] = useState(false);
     const [showRebel, setShowRebel] = useState(false);
     const [showRogue, setShowRogue] = useState(false);
-    const [footerImage, setFooterImage] = useState<File | null>(null);
-
-    const handleFooterImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const file = e.target.files?.[0]
-        if (file) {
-          setFooterImage(file)
-        }
-      }
+    const [showFooterImage, setShowFooterImage] = useState(false);
 
     return (
         <div id="preview" className="w-[874px] h-[1240px] bg-white">
@@ -73,7 +65,7 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <img className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.blob?.url ? props.blob.url : '/avatar.png' } alt="Profile picture"/>
+                    <img className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.avatarBlob?.url ? props.avatarBlob.url : '/avatar.png' } alt="Profile picture"/>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
@@ -114,20 +106,20 @@ export default function Preview (props: PreviewProps) {
                 </div>
 
                 <div className="relative flex flex-col bg-opacity-10 h-[220px] pb-8">
-                    <input id="footer-image" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleFooterImageChange} />
                     <FooterDropdown
                         showRogue={showRogue}
                         setShowRogue={setShowRogue}
                         showRebel={showRebel}
                         setShowRebel={setShowRebel}
-                        footerImage={footerImage}
-                        setFooterImage={setFooterImage}
+                        showFooterImage={showFooterImage}
+                        setShowFooterImage={setShowFooterImage}
+                        footerBlobExists={props.footerBlob !== null}
                     />
-                    { (footerImage || showRebel || showRogue) &&
-                    <Image
+                    { ( showFooterImage || showRebel || showRogue) &&
+                    <img
                         className="max-h-1/4 h-[220px] justify-self-center self-center"
                         width={300}
-                        src={ footerImage ? URL.createObjectURL(footerImage) : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
+                        src={ showFooterImage ? props.footerBlob?.url : (showRebel ? '/rebellug.svg' : '/roguebricks.svg') } alt="Logo" />
                      }
                 </div>
             </div>
