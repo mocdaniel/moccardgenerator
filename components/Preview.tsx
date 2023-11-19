@@ -128,7 +128,7 @@ export default function Preview (props: PreviewProps) {
                     <Image
                         className="max-h-1/4 h-[220px] justify-self-center self-center"
                         width={300}
-                        src={ footerImage ? footerImage : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
+                        src={ footerImage ? URL.createObjectURL(footerImage) : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
                      }
                      </div>
                 
