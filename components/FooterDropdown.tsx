@@ -3,11 +3,15 @@ import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
 type FooterDropdownProps = {
-  showRogue: boolean,
-  showRebel: boolean,
+  showRogueLight: boolean,
+  showRogueDark: boolean,
+  showRebelLight: boolean,
+  showRebelDark: boolean,
   footerImage: File | null,
-  setShowRogue: (show: boolean) => void,
-  setShowRebel: (show: boolean) => void,
+  setShowRogueLight: (show: boolean) => void,
+  setShowRogueDark: (show: boolean) => void,
+  setShowRebelLight: (show: boolean) => void,
+  setShowRebelDark: (show: boolean) => void,
   setFooterImage: (image: File | null) => void,
 }
 
@@ -19,41 +23,81 @@ export default function FooterDropdown(props: FooterDropdownProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuCheckboxItem
-          checked={props.showRogue}
+          checked={props.showRogueLight}
           onCheckedChange={() => {
-            if (!props.showRogue) {
-                props.setShowRebel(false)
+            if (!props.showRogueLight) {
+                props.setShowRogueDark(false)
+                props.setShowRebelLight(false)
+                props.setShowRebelDark(false)
                 props.setFooterImage(null)
-                props.setShowRogue(true)
+                props.setShowRogueLight(true)
             } else {
-                props.setShowRogue(false)
+                props.setShowRogueLight(false)
             }
           }}
           className="text-black"
         >
-          RogueBricks
+          RogueBricks Light
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={props.showRebel}
+          checked={props.showRogueDark}
           onCheckedChange={() => {
-            if (!props.showRebel) {
-                props.setShowRogue(false)
+            if (!props.showRogueDark) {
+                props.setShowRogueLight(false)
+                props.setShowRebelLight(false)
+                props.setShowRebelDark(false)
                 props.setFooterImage(null)
-                props.setShowRebel(true)
+                props.setShowRogueDark(true)
             } else {
-                props.setShowRebel(false)
+                props.setShowRogueDark(false)
             }
           }}
           className="text-black"
         >
-          RebelLUG
+          RogueBricks Dark
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={props.showRebelLight}
+          onCheckedChange={() => {
+            if (!props.showRebelLight) {
+                props.setShowRogueLight(false)
+                props.setShowRogueDark(false)
+                props.setFooterImage(null)
+                props.setShowRebelDark(false)
+                props.setShowRebelLight(true)
+            } else {
+                props.setShowRebelLight(false)
+            }
+          }}
+          className="text-black"
+        >
+          RebelLUG Light
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={props.showRebelDark}
+          onCheckedChange={() => {
+            if (!props.showRebelDark) {
+                props.setShowRogueLight(false)
+                props.setShowRogueDark(false)
+                props.setFooterImage(null)
+                props.setShowRebelLight(false)
+                props.setShowRebelDark(true)
+            } else {
+                props.setShowRebelDark(false)
+            }
+          }}
+          className="text-black"
+        >
+          RebelLUG Dark
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
           checked={props.footerImage !== null}
           onCheckedChange={() => {
             if (!props.footerImage) {
-                props.setShowRogue(false);
-                props.setShowRebel(false);
+                props.setShowRogueLight(false);
+                props.setShowRogueDark(false);
+                props.setShowRebelLight(false);
+                props.setShowRebelDark(false);
                 (document.getElementById('footer-image') as HTMLInputElement)?.click();
             } else {
                 props.setFooterImage(null)

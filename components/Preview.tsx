@@ -2,8 +2,6 @@
 
 import React from "react"
 import Image from "next/image"
-import roguebricksSVG from '../public/roguebricks.svg'
-import rebellugSVG from '../public/rebellug.svg'
 import placeholderAvatar from '../public/avatar.png'
 import flickrSVG from '../public/flickr.svg'
 import globeSVG from '../public/globe.svg'
@@ -14,6 +12,9 @@ import { Roboto_Condensed } from 'next/font/google'
 import { Color } from "react-color-palette"
 import { LinkDropdown } from './LinkDropdown'
 import FooterDropdown from "./FooterDropdown"
+import RebellugSVG from "./ui/rebellug-svg"
+import RoguebricksSVG from "./ui/roguebricks-menu"
+import { Button } from "./ui/button"
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
@@ -31,8 +32,10 @@ export default function Preview (props: PreviewProps) {
     const [showInstagram, setShowInstagram] = React.useState(true);
     const [showEmail, setShowEmail] = React.useState(false);
     const [showWebsite, setShowWebsite] = React.useState(false);
-    const [showRebel, setShowRebel] = React.useState(false);
-    const [showRogue, setShowRogue] = React.useState(false);
+    const [showRebelLight, setShowRebelLight] = React.useState(false);
+    const [showRebelDark, setShowRebelDark] = React.useState(false);
+    const [showRogueLight, setShowRogueLight] = React.useState(false);
+    const [showRogueDark, setShowRogueDark] = React.useState(false);
     const [footerImage, setFooterImage] = React.useState<File | null>(null);
 
 
@@ -117,18 +120,23 @@ export default function Preview (props: PreviewProps) {
                 <div className="relative flex flex-col bg-opacity-10 h-[220px] pb-8">
                     <input id="footer-image" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleFooterImageChange} />
                     <FooterDropdown
-                        showRogue={showRogue}
-                        setShowRogue={setShowRogue}
-                        showRebel={showRebel}
-                        setShowRebel={setShowRebel}
+                        showRogueLight={showRogueLight}
+                        setShowRogueLight={setShowRogueLight}
+                        showRogueDark={showRogueDark}
+                        setShowRogueDark={setShowRogueDark}
+                        showRebelLight={showRebelLight}
+                        setShowRebelLight={setShowRebelLight}
+                        showRebelDark={showRebelDark}
+                        setShowRebelDark={setShowRebelDark}
                         footerImage={footerImage}
                         setFooterImage={setFooterImage}
                     />
-                    { (footerImage || showRebel || showRogue) &&
-                    <Image
-                        className="max-h-1/4 h-[220px] justify-self-center self-center"
-                        width={300}
-                        src={ footerImage ? URL.createObjectURL(footerImage) : (showRebel ? rebellugSVG : roguebricksSVG) } alt="Logo"></Image>
+                    { (footerImage || showRebelLight || showRebelDark || showRogueLight || showRogueDark) &&
+                    footerImage ? <Image className="max-h-1/4 h-[220px] justify-self-center self-center" width={300}
+                        src={URL.createObjectURL(footerImage)} alt="Logo"/> :
+(showRogueLight ? <RoguebricksSVG dark={false}/> : 
+                                ( showRogueDark ? <RoguebricksSVG dark={true}/> : 
+                                    ( showRebelLight ? <RebellugSVG dark={false} /> : <RebellugSVG dark={true} />)))
                      }
                      </div>
                 
