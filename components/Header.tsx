@@ -3,7 +3,7 @@ import { Button } from "./ui/button";
 import {FileDownIcon } from "lucide-react";
 
 type HeaderProps = {
-    renderImage: () => void;
+    renderImage: (() => void) | null;
 }
 export default function Header(props: HeaderProps) {
     return (
@@ -13,12 +13,12 @@ export default function Header(props: HeaderProps) {
                 <Link className="hover:underline text-xl pt-4" href={"/"}>Home</Link>
                 <Link className="hover:underline text-xl pt-4" href={"/faq"}>FAQ</Link>
             </div>
-            <div className="flex flex-row gap-4 absolute right-8 pt-2 justify-between">
-                <Button onClick={props.renderImage} variant="affirmative">
+            { props.renderImage && 
+                <Button className="absolute right-8 pt-2" onClick={props.renderImage} variant="affirmative">
                     <FileDownIcon className="mr-2"/>
                     Download PDF
                 </Button>
-            </div>
+            }
         </div>
     )
 }
