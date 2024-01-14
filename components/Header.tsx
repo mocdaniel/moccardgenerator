@@ -7,18 +7,18 @@ type HeaderProps = {
 }
 export default function Header(props: HeaderProps) {
     return (
-        <div className="flex flex-row w-screen h-8 justify-center items-baseline text-white">
-            <span className="text-2xl absolute left-8 pt-2">MOCCardGenerator</span>
-            <div className="flex flex-row justify-center gap-8">
+        <div className="flex flex-row w-screen h-8 justify-between py-4 px-8 items-baseline text-white">
+            <span className="text-2xl">MOCCardGenerator</span>
+            <div className="flex flex-row justify-between gap-8">
                 <Link className="hover:underline text-xl pt-4" href={"/"}>Home</Link>
                 <Link className="hover:underline text-xl pt-4" href={"/faq"}>FAQ</Link>
+                { props.renderImage && 
+                    <Button className="absolute right-8 mt-4" onClick={props.renderImage} variant="affirmative">
+                        <FileDownIcon className="mr-2"/>
+                        Download PDF
+                    </Button>
+                }
             </div>
-            { props.renderImage && 
-                <Button className="absolute right-8 mt-4" onClick={props.renderImage} variant="affirmative">
-                    <FileDownIcon className="mr-2"/>
-                    Download PDF
-                </Button>
-            }
         </div>
     )
 }
