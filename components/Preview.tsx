@@ -37,7 +37,7 @@ export default function Preview (props: PreviewProps) {
     const [showRebelLight, setShowRebelLight] = React.useState(false);
     const [showRebelDark, setShowRebelDark] = React.useState(false);
     const [showRogueLight, setShowRogueLight] = React.useState(false);
-    const [showRogueDark, setShowRogueDark] = React.useState(false);
+    const [showRogueDark, setShowRogueDark] = React.useState(true);
     const [footerImage, setFooterImage] = React.useState<File | null>(null);
     const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
     const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
