@@ -2,7 +2,6 @@
 
 import React from "react"
 import Image from "next/image"
-import placeholderAvatar from '../public/avatar.png'
 import flickrSVG from '../public/flickr.svg'
 import globeSVG from '../public/globe.svg'
 import instagramSVG from '../public/instagram.svg'
@@ -15,6 +14,7 @@ import FooterDropdown from "./FooterDropdown"
 import RebellugSVG from "./ui/rebellug-svg"
 import RoguebricksSVG from "./ui/roguebricks-menu"
 import { Button } from "./ui/button"
+import { ImagePlus } from "lucide-react"
 
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
@@ -24,7 +24,6 @@ type PreviewProps = {
     branding: boolean,
     color: Color,
     useColor: any,
-    avatar: File | null,
     toggleColorPicker: () => void,
 }
 
@@ -40,6 +39,15 @@ export default function Preview (props: PreviewProps) {
     const [showRogueLight, setShowRogueLight] = React.useState(false);
     const [showRogueDark, setShowRogueDark] = React.useState(false);
     const [footerImage, setFooterImage] = React.useState<File | null>(null);
+    const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
+    const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
+
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0]
+        if (file) {
+          setAvatarImage(file)
+        }
+    }
 
     const handleFooterImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -79,7 +87,23 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" width={160} height={160} src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
+                    <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
+
+                    <div onMouseLeave={() => setHoversAvatar(false)} onMouseEnter={() => setHoversAvatar(true)} onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()} className="ml-8 mb-8 rounded-full border-4  h-[160px] w-[160px]"
+                    style={
+                        {
+                            backgroundImage: avatarImage ? `url(${URL.createObjectURL(avatarImage)})` : 'url("/avatar.png")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderColor: props.color.hex,
+                        }}
+                    >
+                        { hoversAvatar && 
+                            <div className="w-full h-full bg-slate-500 rounded-full bg-opacity-75 flex flex-col justify-center items-center">
+                                <ImagePlus className="text-white" size={40} />
+                            </div>
+                        }
+                    </div>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>

@@ -12,7 +12,6 @@ export default function Home() {
   const [branding] = useState(true);
   const [color, setColor] = useColor("hex", "#ffc116");
   const [visible, setVisible] = useState(false);
-  const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const ref = useRef<HTMLDivElement>(null)
 
   const onButtonClick = useCallback(() => {
@@ -40,13 +39,6 @@ export default function Home() {
       })
   }, [ref])
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setAvatarImage(file)
-    }
-  }
-
   const toggleModal = () => {
     setVisible(!visible)
   }
@@ -62,9 +54,7 @@ export default function Home() {
 
       <main className="w-4/5 mx-auto flex flex-col justify-center items-center gap-8">
           <Header renderImage={onButtonClick}/>
-          <div ref={ref}><Preview branding={ branding } toggleColorPicker={toggleModal} useColor={ useColor } color={ color } avatar={ avatarImage } /></div>
-
-          <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
+          <div ref={ref}><Preview branding={ branding } toggleColorPicker={toggleModal} useColor={ useColor } color={ color }/></div>
       </main>
 
       {visible && (
