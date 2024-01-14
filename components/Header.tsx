@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Button } from "./ui/button";
-import { CircleUserIcon, FileDownIcon } from "lucide-react";
+import {FileDownIcon } from "lucide-react";
 
 type HeaderProps = {
     renderImage: () => void;
@@ -14,13 +14,9 @@ export default function Header(props: HeaderProps) {
                 <Link className="hover:underline text-xl pt-4" href={"/faq"}>FAQ</Link>
             </div>
             <div className="flex flex-row gap-4 absolute right-8 pt-2 justify-between">
-                <Button variant="secondary" onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>
-                    <CircleUserIcon className="mr-2"/>
-                    Upload Avatar
-                </Button>
                 <Button onClick={props.renderImage} variant="affirmative">
                     <FileDownIcon className="mr-2"/>
-                    Generate Image
+                    Download PDF
                 </Button>
             </div>
         </div>
