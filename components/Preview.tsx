@@ -12,7 +12,7 @@ import { Color } from "react-color-palette"
 import { LinkDropdown } from './LinkDropdown'
 import FooterDropdown from "./FooterDropdown"
 import RebellugSVG from "./ui/rebellug-svg"
-import RoguebricksSVG from "./ui/roguebricks-menu"
+import RoguebricksSVG from "./ui/roguebricks-svg"
 import { Button } from "./ui/button"
 import { ImagePlus } from "lucide-react"
 
@@ -165,7 +165,8 @@ export default function Preview (props: PreviewProps) {
                         src={URL.createObjectURL(footerImage)} alt="Logo"/> :
 (showRogueLight ? <RoguebricksSVG dark={false}/> : 
                                 ( showRogueDark ? <RoguebricksSVG dark={true}/> : 
-                                    ( showRebelLight ? <RebellugSVG dark={false} /> : <RebellugSVG dark={true} />)))
+                                    ( showRebelLight ? <RebellugSVG dark={false} /> : 
+                                        ( showRebelDark ? <RebellugSVG dark={true} /> : <></>))))
                      }
                      </div>
             </div>
