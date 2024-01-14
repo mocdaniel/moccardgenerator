@@ -16,13 +16,16 @@ import RebellugSVG from "./ui/rebellug-svg"
 import RoguebricksSVG from "./ui/roguebricks-menu"
 import { Button } from "./ui/button"
 
+
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})
 
 type PreviewProps = {
     branding: boolean,
-    accent: Color,
+    color: Color,
+    useColor: any,
     avatar: File | null,
+    toggleColorPicker: () => void,
 }
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum."
@@ -38,7 +41,6 @@ export default function Preview (props: PreviewProps) {
     const [showRogueDark, setShowRogueDark] = React.useState(false);
     const [footerImage, setFooterImage] = React.useState<File | null>(null);
 
-
     const handleFooterImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
         if (file) {
@@ -48,7 +50,7 @@ export default function Preview (props: PreviewProps) {
 
     return (
         <div id="preview" className="w-[874px] h-[1240px] bg-white">
-            <div className="preview-backgrounds left-0 bottom-0 w-full h-[220px]  opacity-100" style={{ backgroundColor: props.accent.hex }}/>
+            <div className="preview-backgrounds left-0 bottom-0 w-full h-[220px]  opacity-100" style={{ backgroundColor: props.color.hex }}/>
 
             <Image priority className="preview-backgrounds left-0 top-0 w-full h-auto" src={ backgroundImage } alt=""/>
             
@@ -58,11 +60,11 @@ export default function Preview (props: PreviewProps) {
             <div id="preview-content" className="flex flex-col w-[874px] h-[1240px] text-center bg-transparent text-black pt-4">
                 <input type="text" id="mocName" placeholder="MOC title" className={`mx-auto w-4/5 h-[196px] text-7xl text-center uppercase ${robotoBold.className}`}></input> 
 
-                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}/>
+                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.color.hex }}/>
 
                 <textarea className={"mx-auto w-4/5 text-4xl h-[562px] resize-none shrink " + roboto.className} id="mocDescription" name="mocDescription" placeholder={ loremIpsum }/>
 
-                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.accent.hex }}></div>
+                <div className="h-1 mx-auto w-4/5" style={{ backgroundColor: props.color.hex }}></div>
 
                 <div className="flex mx-auto w-4/5 flex-row gap-16 grow relative items-center">
 
@@ -77,7 +79,7 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
+                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" width={160} height={160} src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
@@ -117,7 +119,8 @@ export default function Preview (props: PreviewProps) {
                     </div>
                 </div>
 
-                <div className="relative flex flex-col bg-opacity-10 h-[220px] pb-8">
+                <div className="relative flex flex-col bg-opacity-10 h-[220px] justify-center">
+                    <Button onClick={props.toggleColorPicker} className="no-render absolute top-0 left-0 m-2 border-none" variant="default">Change Color</Button>                    
                     <input id="footer-image" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleFooterImageChange} />
                     <FooterDropdown
                         showRogueLight={showRogueLight}
@@ -139,8 +142,6 @@ export default function Preview (props: PreviewProps) {
                                     ( showRebelLight ? <RebellugSVG dark={false} /> : <RebellugSVG dark={true} />)))
                      }
                      </div>
-                
-        
             </div>
         </div>
     )

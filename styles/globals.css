@@ -90,15 +90,6 @@ label {
   @apply font-bold;
 }
 
-button {
-  @apply border-2;
-  @apply rounded-md;
-  @apply px-4;
-  @apply py-2;
-  @apply font-bold;
-  background-color: transparent;
-}
-
 #preview {
   @apply overflow-hidden;
   @apply relative;

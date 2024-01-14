@@ -1,4 +1,3 @@
-import { Upload } from "lucide-react";
 import { Button } from "./ui/button";
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
 
@@ -19,7 +18,7 @@ export default function FooterDropdown(props: FooterDropdownProps) {
     return (
         <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="no-render absolute top-0 right-0 m-2 border-none" variant="default">Socials</Button>
+        <Button className="no-render absolute top-0 right-0 m-2 border-none" variant="default">Add Logo</Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuCheckboxItem

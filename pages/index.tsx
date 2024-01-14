@@ -5,6 +5,8 @@ import { ColorPicker, useColor } from "react-color-palette"
 import "react-color-palette/lib/css/styles.css"
 import { toPng } from 'html-to-image'
 import jsPDF from 'jspdf'
+import { Button } from '@/components/ui/button'
+import Header from '@/components/Header'
 
 export default function Home() {
   const [branding] = useState(true);
@@ -58,40 +60,21 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-4/5 mx-auto flex flex-row justify-center items-center pt-16 gap-8">
-          <div ref={ref}><Preview branding={ branding } accent={ color } avatar={ avatarImage } /></div>
+      <main className="w-4/5 mx-auto flex flex-col justify-center items-center gap-8">
+          <Header renderImage={onButtonClick}/>
+          <div ref={ref}><Preview branding={ branding } toggleColorPicker={toggleModal} useColor={ useColor } color={ color } avatar={ avatarImage } /></div>
 
-          <div className="flex flex-col gap-2 border-2 rounded-md p-4 border-light h-min">
-            <h1>MOC Card Generator</h1>
-          
-            <div className="flex flex-col pt-8 gap-2">
-              <div className="flex flex-row gap-2 pt-8 justify-between items-center">
-                <div className="flex flex-row gap-2">
-                  <div style={{ backgroundColor: color.hex}} className="w-8 h-8 mr-4" onClick={toggleModal}></div>
-                  <label>Click to pick your accent color</label>
-                </div>
-                
-                <div className="ml-8">
-                  <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
-                  <button onClick={() => (document.getElementById('avatar') as HTMLInputElement)?.click()}>Upload Avatar</button>                
-                </div>
-              </div>
-
-              <div className="flex flex-row flex-grow gap-2 justify-between pt-8">
-                <button className="flex-grow" onClick={ onButtonClick }>Download as PNG</button>
-              </div>
-            </div>
-          </div>
+          <input id="avatar" type="file" hidden className="opacity-0 absolute inset-0" onChange={handleImageChange} />
       </main>
 
       {visible && (
-        <div className="fixed top-0 left-0 w-full h-full bg-dark bg-opacity-50 flex justify-center items-center">
-          <div className="bg-light p-4 rounded-lg flex flex-col gap-4 items-center">
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center">
+          <div className="bg-white max-w-xl flex-grow p-4 rounded-lg flex flex-col gap-4 items-center">
             <h2 className="text-2xl font-bold text-black">Pick an accent color</h2>
             <ColorPicker width={456} height={228} color={color} 
               onChange={setColor} hideHSV dark 
             />
-            <button className="hover:bg-dark hover:text-light text-dark border-dark" onClick={toggleModal}>Save</button>
+            <Button className="no-border" onClick={toggleModal} variant="default">Save</Button>
           </div>
         </div>  
       )}
