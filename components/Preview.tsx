@@ -79,7 +79,15 @@ export default function Preview (props: PreviewProps) {
                         setShowWebsite={setShowWebsite}
                     />
 
-                    <Image className="ml-8 mb-8 rounded-full ring-4 ring-black h-[160px] w-[160px]" width={160} height={160} src={ props.avatar ? URL.createObjectURL(props.avatar) : placeholderAvatar } alt="Profile picture"/>
+                    <div className="ml-8 mb-8 rounded-full border-4  h-[160px] w-[160px]"
+                    style={
+                        {
+                            backgroundImage: props.avatar ? `url(${URL.createObjectURL(props.avatar)})` : 'url("/avatar.png")',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                            borderColor: props.color.hex,
+                        }}
+                    ></div>
                     <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
                         <div className="flex flex-col gap-1 justify-between items-start">
                             <input className={"text-4xl " + robotoBold.className} type="text" id="builder" name="builder" placeholder="Builder"/>
