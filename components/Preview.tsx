@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react"
+import { useState } from "react"
 import Image from "next/image"
 import placeholderAvatar from '../public/avatar.png'
 import flickrSVG from '../public/flickr.svg'
@@ -15,7 +15,6 @@ import FooterDropdown from "./FooterDropdown"
 import RebellugSVG from "./ui/rebellug-svg"
 import RoguebricksSVG from "./ui/roguebricks-menu"
 import { Button } from "./ui/button"
-
 
 const robotoBold = Roboto_Condensed({ subsets: ['latin-ext'], weight: '700'})
 const roboto = Roboto_Condensed({ subsets: ['latin-ext'], weight: '400'})

@@ -90,7 +90,7 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           RebelLUG Dark
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={props.footerImage !== null}
+          checked={props.showFooterImage}
           onCheckedChange={() => {
             if (!props.footerImage) {
                 props.setShowRogueLight(false);
@@ -99,12 +99,13 @@ export default function FooterDropdown(props: FooterDropdownProps) {
                 props.setShowRebelDark(false);
                 (document.getElementById('footer-image') as HTMLInputElement)?.click();
             } else {
-                props.setFooterImage(null)
+                props.setShowFooterImage(false)
             }
           }}
           className="text-black"
+          disabled={!props.footerBlobExists}
         >
-          Upload
+          Your Upload
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>

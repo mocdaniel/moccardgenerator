@@ -12,8 +12,12 @@ export default function Home() {
   const [branding] = useState(true);
   const [color, setColor] = useColor("hex", "#ffc116");
   const [visible, setVisible] = useState(false);
-  const [avatarImage, setAvatarImage] = useState<File | null>(null);
   const ref = useRef<HTMLDivElement>(null)
+  const avatarInputFileRef = useRef<HTMLInputElement>(null);
+  const [avatarBlob, setAvatarBlob] = useState<PutBlobResult | null>(null);
+  const footerInputFileRef = useRef<HTMLInputElement>(null);
+  const [footerBlob, setFooterBlob] = useState<PutBlobResult | null>(null);
+  
 
   const onButtonClick = useCallback(() => {
     if (ref.current === null) {
@@ -39,13 +43,6 @@ export default function Home() {
         console.log(err)
       })
   }, [ref])
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      setAvatarImage(file)
-    }
-  }
 
   const toggleModal = () => {
     setVisible(!visible)
