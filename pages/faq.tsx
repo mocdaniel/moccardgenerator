@@ -16,7 +16,7 @@ export default function Faq() {
                     <AccordionItem value="item-2">
                         <AccordionTrigger className="text-2xl">Do you store/collect my data?</AccordionTrigger>
                         <AccordionContent className="text-xl">
-                            <b>No.</b> The whole application runs exclusively in your browser. No data is sent to our server.<br/>In fact, we don't even see what you are uploading or generating.
+                            <b>No.</b> The whole application runs exclusively in your browser. No data is sent to our server.<br/>In fact, we don&apos;t even see what you are uploading or generating.
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-3">
@@ -34,13 +34,13 @@ export default function Faq() {
                     <AccordionItem value="item-5">
                         <AccordionTrigger className="text-2xl">Where can I request features or report problems?</AccordionTrigger>
                         <AccordionContent className="text-xl">
-                            <b>Via Mail.</b> Send a message Daniel's way (<b>dbodky[at]gmail[dot]com</b>) and he'll be in touch!
+                            <b>Via Mail.</b> Send a message Daniel&apos;s way (<b>dbodky[at]gmail[dot]com</b>) and he&apos;ll be in touch!
                         </AccordionContent>
                     </AccordionItem>
                     <AccordionItem value="item-6">
-                        <AccordionTrigger className="text-2xl">The preview doesn't fit on my screen!</AccordionTrigger>
+                        <AccordionTrigger className="text-2xl">The preview doesn&apos;t fit on my screen!</AccordionTrigger>
                         <AccordionContent className="text-xl">
-                            <b>This can happen.</b> Daniel's no web designer. Better responsive design is on the roadmap.
+                            <b>This can happen.</b> Daniel&apos;s no web designer/frontend engineer. Better responsive design is on the roadmap.
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
