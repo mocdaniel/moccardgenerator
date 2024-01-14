@@ -14,7 +14,7 @@ export default function Header(props: HeaderProps) {
                 <Link className="hover:underline text-xl pt-4" href={"/faq"}>FAQ</Link>
             </div>
             { props.renderImage && 
-                <Button className="absolute right-8 pt-2" onClick={props.renderImage} variant="affirmative">
+                <Button className="absolute right-8 mt-4" onClick={props.renderImage} variant="affirmative">
                     <FileDownIcon className="mr-2"/>
                     Download PDF
                 </Button>
