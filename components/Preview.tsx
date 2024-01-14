@@ -161,7 +161,7 @@ export default function Preview (props: PreviewProps) {
                         setFooterImage={setFooterImage}
                     />
                     { (footerImage || showRebelLight || showRebelDark || showRogueLight || showRogueDark) &&
-                    footerImage ? <Image className="max-h-1/4 h-[220px] justify-self-center self-center" width={300}
+                    footerImage ? <img className="max-h-[220px] max-w-[300px] justify-self-center self-center"
                         src={URL.createObjectURL(footerImage)} alt="Logo"/> :
 (showRogueLight ? <RoguebricksSVG dark={false}/> : 
                                 ( showRogueDark ? <RoguebricksSVG dark={true}/> : 
