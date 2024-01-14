@@ -41,6 +41,7 @@ export default function Preview (props: PreviewProps) {
     const [footerImage, setFooterImage] = React.useState<File | null>(null);
     const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
     const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
+    
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -58,6 +59,7 @@ export default function Preview (props: PreviewProps) {
 
     return (
         <div id="preview" className="w-[874px] h-[1240px] bg-white">
+            
             <div className="preview-backgrounds left-0 bottom-0 w-full h-[220px]  opacity-100" style={{ backgroundColor: props.color.hex }}/>
 
             <Image priority className="preview-backgrounds left-0 top-0 w-full h-auto" src={ backgroundImage } alt=""/>
