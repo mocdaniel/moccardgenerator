@@ -7,7 +7,7 @@ type HeaderProps = {
 }
 export default function Header(props: HeaderProps) {
     return (
-        <div className="flex flex-row w-screen h-8 justify-between py-4 px-8 items-baseline text-white">
+        <div className="flex flex-row w-full h-8 justify-between py-4 px-8 items-baseline text-white">
             <span className="text-2xl">MOCCardGenerator</span>
             <div className="flex flex-row justify-between items-center gap-8">
                 <Link className="hover:underline text-xl" href={"/"}>Home</Link>
