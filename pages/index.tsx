@@ -58,7 +58,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="w-4/5 mx-auto flex flex-col justify-center items-center gap-8">
+      <main className="mx-auto flex flex-col justify-center items-center gap-8">
           <Header renderImage={onButtonClick}/>
           <div ref={ref}><Preview branding={ branding } toggleColorPicker={toggleModal} useColor={ useColor } color={ color }/></div>
       </main>
