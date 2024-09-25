@@ -33,8 +33,8 @@ export default function Preview(props: PreviewProps) {
   const [showInstagram, setShowInstagram] = React.useState(true);
   const [showEmail, setShowEmail] = React.useState(false);
   const [showWebsite, setShowWebsite] = React.useState(false);
-  const [showRogueLight, setShowRogueLight] = React.useState(false);
-  const [showRogueDark, setShowRogueDark] = React.useState(true);
+  const [showRogueLight, setShowRogueLight] = React.useState(true);
+  const [showRogueDark, setShowRogueDark] = React.useState(false);
   const [footerImage, setFooterImage] = React.useState<File | null>(null);
   const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
   const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
