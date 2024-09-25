@@ -1,37 +1,41 @@
 import { Button } from "./ui/button";
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "./ui/dropdown-menu";
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 type FooterDropdownProps = {
-  showRogueLight: boolean,
-  showRogueDark: boolean,
-  showRebelLight: boolean,
-  showRebelDark: boolean,
-  footerImage: File | null,
-  setShowRogueLight: (show: boolean) => void,
-  setShowRogueDark: (show: boolean) => void,
-  setShowRebelLight: (show: boolean) => void,
-  setShowRebelDark: (show: boolean) => void,
-  setFooterImage: (image: File | null) => void,
-}
+  showRogueLight: boolean;
+  showRogueDark: boolean;
+  footerImage: File | null;
+  setShowRogueLight: (show: boolean) => void;
+  setShowRogueDark: (show: boolean) => void;
+  setFooterImage: (image: File | null) => void;
+};
 
 export default function FooterDropdown(props: FooterDropdownProps) {
-    return (
-        <DropdownMenu>
+  return (
+    <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="no-render absolute top-0 right-0 m-2 border-none" variant="default">Add Logo</Button>
+        <Button
+          className="no-render absolute top-0 right-0 m-2 border-none"
+          variant="default"
+        >
+          Add Logo
+        </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56">
         <DropdownMenuCheckboxItem
           checked={props.showRogueLight}
           onCheckedChange={() => {
             if (!props.showRogueLight) {
-                props.setShowRogueDark(false)
-                props.setShowRebelLight(false)
-                props.setShowRebelDark(false)
-                props.setFooterImage(null)
-                props.setShowRogueLight(true)
+              props.setShowRogueDark(false);
+              props.setFooterImage(null);
+              props.setShowRogueLight(true);
             } else {
-                props.setShowRogueLight(false)
+              props.setShowRogueLight(false);
             }
           }}
           className="text-black"
@@ -42,13 +46,11 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           checked={props.showRogueDark}
           onCheckedChange={() => {
             if (!props.showRogueDark) {
-                props.setShowRogueLight(false)
-                props.setShowRebelLight(false)
-                props.setShowRebelDark(false)
-                props.setFooterImage(null)
-                props.setShowRogueDark(true)
+              props.setShowRogueLight(false);
+              props.setFooterImage(null);
+              props.setShowRogueDark(true);
             } else {
-                props.setShowRogueDark(false)
+              props.setShowRogueDark(false);
             }
           }}
           className="text-black"
@@ -56,50 +58,16 @@ export default function FooterDropdown(props: FooterDropdownProps) {
           RogueBricks Dark
         </DropdownMenuCheckboxItem>
         <DropdownMenuCheckboxItem
-          checked={props.showRebelLight}
-          onCheckedChange={() => {
-            if (!props.showRebelLight) {
-                props.setShowRogueLight(false)
-                props.setShowRogueDark(false)
-                props.setFooterImage(null)
-                props.setShowRebelDark(false)
-                props.setShowRebelLight(true)
-            } else {
-                props.setShowRebelLight(false)
-            }
-          }}
-          className="text-black"
-        >
-          RebelLUG Light
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
-          checked={props.showRebelDark}
-          onCheckedChange={() => {
-            if (!props.showRebelDark) {
-                props.setShowRogueLight(false)
-                props.setShowRogueDark(false)
-                props.setFooterImage(null)
-                props.setShowRebelLight(false)
-                props.setShowRebelDark(true)
-            } else {
-                props.setShowRebelDark(false)
-            }
-          }}
-          className="text-black"
-        >
-          RebelLUG Dark
-        </DropdownMenuCheckboxItem>
-        <DropdownMenuCheckboxItem
           checked={props.footerImage !== null}
           onCheckedChange={() => {
             if (!props.footerImage) {
-                props.setShowRogueLight(false);
-                props.setShowRogueDark(false);
-                props.setShowRebelLight(false);
-                props.setShowRebelDark(false);
-                (document.getElementById('footer-image') as HTMLInputElement)?.click();
+              props.setShowRogueLight(false);
+              props.setShowRogueDark(false);
+              (
+                document.getElementById("footer-image") as HTMLInputElement
+              )?.click();
             } else {
-                props.setFooterImage(null)
+              props.setFooterImage(null);
             }
           }}
           className="text-black"
@@ -108,5 +76,5 @@ export default function FooterDropdown(props: FooterDropdownProps) {
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
-    )
+  );
 }
