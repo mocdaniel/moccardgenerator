@@ -166,7 +166,7 @@ export default function Preview(props: PreviewProps) {
                 <div className="flex flex-row gap-2 my-1 items-center">
                   <Image width={30} src={flickrSVG} alt="Flickr Logo" />
                   <input
-                    className={"text-2xl " + latoBold.className}
+                    className={"text-2xl " + lato.className}
                     type="text"
                     id="flickr"
                     name="flickr"
