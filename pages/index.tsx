@@ -10,7 +10,7 @@ import Header from "@/components/Header";
 
 export default function Home() {
   const [branding] = useState(true);
-  const [color, setColor] = useColor("hex", "#000000");
+  const [color, setColor] = useColor("hex", "#1e1e1e");
   const [visible, setVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const [isChromeBased, setIsChromeBased] = useState(true);
