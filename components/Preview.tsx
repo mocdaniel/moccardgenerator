@@ -7,7 +7,7 @@ import globeSVG from "../public/globe.svg";
 import instagramSVG from "../public/instagram.svg";
 import mailSVG from "../public/mail.svg";
 import backgroundImage from "../public/background.png";
-import { Roboto_Condensed } from "next/font/google";
+import { Lato } from "next/font/google";
 import { Color } from "react-color-palette";
 import { LinkDropdown } from "./LinkDropdown";
 import FooterDropdown from "./FooterDropdown";
@@ -15,8 +15,8 @@ import RoguebricksSVG from "./ui/roguebricks-svg";
 import { Button } from "./ui/button";
 import { ImagePlus } from "lucide-react";
 
-const robotoBold = Roboto_Condensed({ subsets: ["latin-ext"], weight: "700" });
-const roboto = Roboto_Condensed({ subsets: ["latin-ext"], weight: "400" });
+const latoBold = Lato({ subsets: ["latin-ext"], weight: "700" });
+const lato = Lato({ subsets: ["latin-ext"], weight: "400" });
 
 type PreviewProps = {
   branding: boolean;
@@ -77,7 +77,7 @@ export default function Preview(props: PreviewProps) {
           type="text"
           id="mocName"
           placeholder="MOC title"
-          className={`mx-auto w-4/5 h-[196px] text-7xl text-center uppercase ${robotoBold.className}`}
+          className={`mx-auto w-4/5 h-[196px] text-7xl text-center uppercase ${latoBold.className}`}
         ></input>
 
         <div
@@ -87,8 +87,8 @@ export default function Preview(props: PreviewProps) {
 
         <textarea
           className={
-            "mx-auto w-4/5 text-4xl h-[562px] resize-none shrink " +
-            roboto.className
+            "mx-auto w-4/5 text-3xl h-[562px] resize-none shrink " +
+            lato.className
           }
           id="mocDescription"
           name="mocDescription"
@@ -145,7 +145,7 @@ export default function Preview(props: PreviewProps) {
           <div className="flex flex-col py-4 self-stretch grow gap-1 justify-start">
             <div className="flex flex-col gap-1 justify-between items-start">
               <input
-                className={"text-4xl " + robotoBold.className}
+                className={"text-4xl " + latoBold.className}
                 type="text"
                 id="builder"
                 name="builder"
@@ -153,7 +153,7 @@ export default function Preview(props: PreviewProps) {
               />
 
               <input
-                className={"text-3xl mb-6 " + robotoBold.className}
+                className={"text-2xl mb-6 " + latoBold.className}
                 type="text"
                 id="from"
                 name="from"
@@ -166,7 +166,7 @@ export default function Preview(props: PreviewProps) {
                 <div className="flex flex-row gap-2 my-1 items-center">
                   <Image width={30} src={flickrSVG} alt="Flickr Logo" />
                   <input
-                    className={"text-2xl " + roboto.className}
+                    className={"text-2xl " + lato.className}
                     type="text"
                     id="flickr"
                     name="flickr"
@@ -179,7 +179,7 @@ export default function Preview(props: PreviewProps) {
                 <div className="flex flex-row gap-2 my-1 items-center">
                   <Image width={30} src={instagramSVG} alt="Instagram Logo" />
                   <input
-                    className={`text-2xl ${roboto.className}`}
+                    className={`text-2xl ${lato.className}`}
                     type="text"
                     id="instagram"
                     name="instagram"
@@ -192,7 +192,7 @@ export default function Preview(props: PreviewProps) {
                 <div className="flex flex-row gap-2 my-1 items-center">
                   <Image width={30} src={mailSVG} alt="Mail Logo" />
                   <input
-                    className={`text-2xl ${roboto.className}`}
+                    className={`text-2xl ${lato.className}`}
                     type="text"
                     id="mail"
                     name="mail"
@@ -205,7 +205,7 @@ export default function Preview(props: PreviewProps) {
                 <div className="flex flex-row gap-2 my-1 items-center">
                   <Image width={30} src={globeSVG} alt="Globe Logo" />
                   <input
-                    className={`text-2xl ${roboto.className}`}
+                    className={`text-2xl ${lato.className}`}
                     type="text"
                     id="website"
                     name="website"
