@@ -87,7 +87,7 @@ export default function Preview(props: PreviewProps) {
 
         <textarea
           className={
-            "mx-auto w-4/5 text-4xl h-[562px] resize-none shrink " +
+            "mx-auto w-4/5 text-3xl h-[562px] resize-none shrink " +
             lato.className
           }
           id="mocDescription"
@@ -153,7 +153,7 @@ export default function Preview(props: PreviewProps) {
               />
 
               <input
-                className={"text-3xl mb-6 " + latoBold.className}
+                className={"text-2xl mb-6 " + latoBold.className}
                 type="text"
                 id="from"
                 name="from"
