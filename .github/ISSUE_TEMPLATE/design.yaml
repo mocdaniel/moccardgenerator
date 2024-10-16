@@ -1,0 +1,20 @@
+name: UI/UX problems
+description: Report or request UI/UX problems and enhancements
+title: "[UI/UX]: "
+labels: ["ui/ux"]
+assignees:
+  - mocdaniel
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting/requesting a UI/UX problem/change!
+  - type: textarea
+    id: feature
+    attributes:
+      label: What do you want to tell us?
+      description: Also tell us, how the issue manifests or your proposed change would look like!
+      placeholder: Share your thoughts and problems!
+      value: "The preview doesn't render the title!"
+    validations:
+      required: true
