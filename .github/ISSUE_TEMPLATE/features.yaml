@@ -1,0 +1,20 @@
+name: Feature Request
+description: File a feature request
+title: "[Feature]: "
+labels: ["feature"]
+assignees:
+  - mocdaniel
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for requesting a new feature!
+  - type: textarea
+    id: feature
+    attributes:
+      label: What does the feature do?
+      description: Also tell us, how the feature should work in your opinion?
+      placeholder: Tell us what you want!
+      value: "It needs to do X!"
+    validations:
+      required: true
