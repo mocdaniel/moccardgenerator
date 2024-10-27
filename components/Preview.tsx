@@ -39,7 +39,7 @@ export default function Preview(props: PreviewProps) {
   const [footerImage, setFooterImage] = React.useState<File | null>(null);
   const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
   const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
-  const [titleSize, setTitleSize] = React.useState<4.5 | 3.5 | 2.5>(4.5);
+  const [titleSize, setTitleSize] = React.useState<4.5 | 3.5 | 2.5 | 2>(4.5);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

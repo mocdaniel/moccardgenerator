@@ -8,8 +8,8 @@ import {
 } from "./ui/dropdown-menu";
 
 type TitleSizeDropdownProps = {
-  titleSize: 4.5 | 3.5 | 2.5;
-  setTitleSize: (size: 4.5 | 3.5 | 2.5) => void;
+  titleSize: 4.5 | 3.5 | 2.5 | 2;
+  setTitleSize: (size: 4.5 | 3.5 | 2.5 | 2) => void;
 };
 
 export default function TitleSizeDropdown(props: TitleSizeDropdownProps) {
@@ -57,6 +57,17 @@ export default function TitleSizeDropdown(props: TitleSizeDropdownProps) {
           className="text-black"
         >
           small
+        </DropdownMenuCheckboxItem>
+        <DropdownMenuCheckboxItem
+          checked={props.titleSize == 2}
+          onCheckedChange={() => {
+            if (props.titleSize != 2) {
+              props.setTitleSize(2);
+            }
+          }}
+          className="text-black"
+        >
+          tiny
         </DropdownMenuCheckboxItem>
       </DropdownMenuContent>
     </DropdownMenu>
