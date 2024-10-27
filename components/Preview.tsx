@@ -14,6 +14,7 @@ import FooterDropdown from "./FooterDropdown";
 import RoguebricksSVG from "./ui/roguebricks-svg";
 import { Button } from "./ui/button";
 import { ImagePlus } from "lucide-react";
+import TitleSizeDropdown from "./TitleSizeDropdown";
 
 const latoBold = Lato({ subsets: ["latin-ext"], weight: "700" });
 const lato = Lato({ subsets: ["latin-ext"], weight: "400" });
@@ -38,6 +39,7 @@ export default function Preview(props: PreviewProps) {
   const [footerImage, setFooterImage] = React.useState<File | null>(null);
   const [avatarImage, setAvatarImage] = React.useState<File | null>(null);
   const [hoversAvatar, setHoversAvatar] = React.useState<boolean>(false);
+  const [titleSize, setTitleSize] = React.useState<4.5 | 3.5 | 2.5 | 2>(4.5);
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -73,11 +75,13 @@ export default function Preview(props: PreviewProps) {
         id="preview-content"
         className="flex flex-col w-[874px] h-[1240px] text-center bg-transparent text-black pt-4"
       >
+        <TitleSizeDropdown titleSize={titleSize} setTitleSize={setTitleSize} />
         <input
           type="text"
           id="mocName"
           placeholder="MOC title"
-          className={`mx-auto w-4/5 h-[196px] text-7xl text-center uppercase ${latoBold.className}`}
+          className={`mx-auto w-4/5 h-[196px] text-center uppercase ${latoBold.className}`}
+          style={{ fontSize: `${titleSize}rem` }}
         ></input>
 
         <div
