@@ -29,7 +29,7 @@ export default function Home() {
       return !node.classList.contains("no-render");
     }
 
-    toPng(ref.current, { filter: renderFilter })
+    toPng(ref.current, { filter: renderFilter, pixelRatio: 2 })
       .then((dataUrl: string) => {
         var doc = new jsPDF({
           orientation: "portrait",
