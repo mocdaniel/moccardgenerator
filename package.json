@@ -23,7 +23,7 @@
     "fs": "^0.0.1-security",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",
-    "lucide-react": "^0.309.0",
+    "lucide-react": "^0.454.0",
     "next": "^14.2.13",
     "react": "18.2.0",
     "react-color-palette": "^6.2.0",
